@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Eliza - Chatbot</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+
+    <div class="w3-container w3-margin">
+
+        <h1 class="">Welcome to Eliza</h1>
+
+        <form class="w3-container">
+
+            <textarea class="w3-input w3-border " name="chatBox" id="chatBoxArea" readonly wrap="soft" style="width: 500px; height: 300px">Welcome! I am Eliza. How can I help you?</textarea>
+            <input class="w3-input w3-border w3-margin-top" type="text" id="userTextInput" name="userTextInput" style="width: 500px"
+                placeholder="Please type a question...">
+            <button class="w3-button w3-black w3-round-large w3-margin-top" type="button" onclick="askQuestion()">Send Text</button>
+
+        </form>
+
+    </div>
+
+    <script type="text/javascript">
+
+        function askQuestion() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("chatBoxArea").value += "\nUser: " + xhr.responseText + "\nEliza: Why don't you tell me more about that?";
+                }
+            }
+
+            xhr.open("POST", "/question");
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+            xhr.setRequestHeader("user-question", document.getElementById("userTextInput").value);
+            xhr.send()
+        }
+
+
+    </script>
+
+</body>
+
+</html>
