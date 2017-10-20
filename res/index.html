@@ -7,16 +7,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        /* Taken from:  
+        https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css */
+
+        .page-bg {
+            background: url("./background.jpg");
+            filter: blur(5px);
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
 
 </head>
 
 <body>
-
+    <div class="page-bg"></div>
     <div class="w3-container w3-margin">
 
-        <h1 class="">Welcome to Eliza</h1>
+        <h1 class="w3-text-white">Welcome to Eliza</h1>
 
-        <form class="w3-container">
+        <form class="w3-container" onSubmit="return false;">
 
             <textarea class="w3-input w3-border " name="chatBox" id="chatBoxArea" readonly wrap="soft" style="width: 500px; height: 300px">Welcome! I am Eliza. How can I help you?</textarea>
             <input class="w3-input w3-border w3-margin-top" type="text" id="userTextInput" name="userTextInput" style="width: 500px"
@@ -30,18 +46,21 @@
     <script type="text/javascript">
 
         function askQuestion() {
+            var textarea = document.getElementById("chatBoxArea");
             var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById("chatBoxArea").value += "\nUser: " + xhr.responseText + "\nEliza: Why don't you tell me more about that?";
-                }
-            }
 
             xhr.open("POST", "/question");
             xhr.setRequestHeader("Cache-Control", "no-cache");
             xhr.setRequestHeader("user-question", document.getElementById("userTextInput").value);
-            xhr.send()
+            xhr.send();
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    textarea.value += "\nUser: " + xhr.responseText + "\nEliza: Why don't you tell me more about that?\n";
+                    textarea.scrollTop = textarea.scrollHeight;
+                }
+            }
         }
 
 

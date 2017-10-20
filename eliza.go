@@ -24,7 +24,8 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	http.HandleFunc("/question", questionHandler)
-	http.HandleFunc("/", handler)
+	// http.HandleFunc("/", handler)
+	http.Handle("/", http.FileServer(http.Dir("./res")))
 	http.ListenAndServe(":8080", nil)
 
 }
