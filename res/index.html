@@ -11,7 +11,6 @@
 
         /* Taken from:  
         https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css */
-
         .page-bg {
             background: url("./background.jpg");
             filter: blur(5px);
@@ -37,34 +36,13 @@
             <textarea class="w3-input w3-border " name="chatBox" id="chatBoxArea" readonly wrap="soft" style="width: 500px; height: 300px">Welcome! I am Eliza. How can I help you?</textarea>
             <input class="w3-input w3-border w3-margin-top" type="text" id="userTextInput" name="userTextInput" style="width: 500px"
                 placeholder="Please type a question...">
-            <button class="w3-button w3-black w3-round-large w3-margin-top" type="button" onclick="askQuestion()">Send Text</button>
+            <button class="w3-button w3-black w3-round-large w3-margin-top" type="button" onclick="askQuestion()">Talk to Eliza</button>
 
         </form>
 
     </div>
 
-    <script type="text/javascript">
-
-        function askQuestion() {
-            var textarea = document.getElementById("chatBoxArea");
-            var xhr = new XMLHttpRequest();
-
-            xhr.open("POST", "/question");
-            xhr.setRequestHeader("Cache-Control", "no-cache");
-            xhr.setRequestHeader("user-question", document.getElementById("userTextInput").value);
-            xhr.send();
-
-            xhr.onreadystatechange = function () {
-
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    textarea.value += "\nUser: " + xhr.responseText + "\nEliza: Why don't you tell me more about that?\n";
-                    textarea.scrollTop = textarea.scrollHeight;
-                }
-            }
-        }
-
-
-    </script>
+    <script type="text/javascript" src="./script.js"></script>
 
 </body>
 
