@@ -14,7 +14,7 @@ function askQuestion() {
 
     // set a custom header value to the value of the text input field
     xhr.setRequestHeader("user-question", document.getElementById("userTextInput").value);
-    
+
     // send the request
     xhr.send();
 
@@ -23,9 +23,14 @@ function askQuestion() {
     xhr.onreadystatechange = function () {
 
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // append new text to the textarea and keep new text in view
-            textarea.value += "\nUser: " + xhr.responseText + "\nEliza: Why don't you tell me more about that?\n";
-            textarea.scrollTop = textarea.scrollHeight;
+            var userName = xhr.getResponseHeader("userName");
+            if (xhr.responseText.length > 0) {
+
+                // append new text to the textarea and keep new text in view
+                textarea.value += "\n" + userName + ": " + xhr.responseText + "\nEliza: Why don't you tell me more about that?\n";
+                textarea.scrollTop = textarea.scrollHeight;
+            }
         }
     }
 }
+
