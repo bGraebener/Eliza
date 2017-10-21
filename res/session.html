@@ -31,9 +31,9 @@
 
         <h1 class="w3-text-white">Welcome to Eliza</h1>
 
-        <form class="w3-container" onSubmit="return false;">
+        <form class="w3-container  w3-margin-top" onSubmit="return false;">
 
-            <textarea class="w3-input w3-border " name="chatBox" id="chatBoxArea" readonly wrap="soft" style="width: 800px; height: 300px">Welcome {{.Username}}! I am Eliza. How can I help you?</textarea>
+            <textarea class="w3-input w3-border" name="chatBox" id="chatBoxArea" readonly wrap="soft" style="width: 800px; height: 300px; line-height: 2em;">Eliza: Welcome {{.Username}}! I am Eliza. How can I help you?</textarea>
             <input class="w3-input w3-border w3-margin-top" type="text" id="userTextInput" name="userTextInput" style="width: 800px"
                 placeholder="Please type a question...">
             <button class="w3-button w3-gray w3-hover-black w3-round-large w3-margin-top" type="button" onclick="askQuestion()">Submit Question</button>

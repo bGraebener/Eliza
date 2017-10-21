@@ -2,6 +2,12 @@
 // function that gets executed on the button click
 function askQuestion() {
     var textarea = document.getElementById("chatBoxArea");
+    var userText = document.getElementById("userTextInput").value;
+
+    // don't send request if user didn't enter text
+    if (userText.length < 1) {
+        return;
+    }
 
     // create a new AJAX object
     var xhr = new XMLHttpRequest();
@@ -13,7 +19,7 @@ function askQuestion() {
     xhr.setRequestHeader("Cache-Control", "no-cache");
 
     // set a custom header value to the value of the text input field
-    xhr.setRequestHeader("user-question", document.getElementById("userTextInput").value);
+    xhr.setRequestHeader("user-question", userText);
 
     // send the request
     xhr.send();
@@ -27,7 +33,7 @@ function askQuestion() {
             if (xhr.responseText.length > 0) {
 
                 // append new text to the textarea and keep new text in view
-                textarea.value += "\n" + userName + ": " + xhr.responseText + "\nEliza: Why don't you tell me more about that?\n";
+                textarea.value += "\n" + userName + ": " + xhr.responseText + "\nEliza: Why don't you tell me more about that?";
                 textarea.scrollTop = textarea.scrollHeight;
             }
         }
