@@ -27,13 +27,14 @@
 
 <body>
     <div class="page-bg"></div>
-    <div class="w3-container w3-margin">
 
+    <header class="w3-bar w3-light-gray w3-opacity" style="width:100%">
+        <a href="/" class="w3-bar-item w3-right w3-border w3-button w3-margin">New Session</a>
+        <a href="/about" class="w3-bar-item w3-right w3-border w3-button w3-margin">About</a>
+    </header>
+
+    <div class="w3-container w3-margin">
         <h1 class="w3-text-white">Welcome to Eliza</h1>
-        <div class="w3-bar">
-            <a href="/" class="w3-bar-item w3-right w3-border w3-button w3-text-white w3-hover-black">New Session</a>
-            <a href="/about" class="w3-bar-item w3-right w3-border w3-button w3-text-white w3-hover-black">About</a>
-        </div>
 
         <form class="w3-container  w3-margin-top" onSubmit="return false;">
 
@@ -45,6 +46,11 @@
         </form>
 
     </div>
+
+    <footer class="w3-bar w3-light-gray w3-opacity" style="position:fixed; bottom:0; width:100%">
+
+        <p class="w3-center">Bastian Graebener - G00340600 - Eliza Chatbot - Data Representation and Querying</p>
+    </footer>
 
     <script type="text/javascript" src="./script.js"></script>
 
