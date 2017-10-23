@@ -11,7 +11,8 @@ type data struct {
 	Username string
 }
 
-var tmp data
+var tmpData data
+var t *template.Template
 
 // function that gets executed every time a request is made to /question
 func questionHandler(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +20,7 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 	question := r.Header.Get("user-question")
 
 	// pass the username to be used in the chat window
-	w.Header().Set("userName", tmp.Username)
+	w.Header().Set("userName", tmpData.Username)
 
 	question = strings.ToUpper(question)
 
@@ -29,27 +30,28 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 //function that starts a new "session" after the user put in a username
-func sessionHandler(w http.ResponseWriter, r *http.Request) {
+func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 	// retrieve the user name
-	tmp.Username = r.FormValue("userNameInput")
+	tmpData.Username = r.FormValue("userNameInput")
 
 	// redirect to same page if user didn't enter a name
-	if len(tmp.Username) < 1 {
+	if len(tmpData.Username) < 1 {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 
-	// parse and execute the main html file
-	t, _ := template.ParseFiles("./res/session.html")
-	t.Execute(w, &tmp)
+	// execute the html file
+	t.Execute(w, &tmpData)
 }
 
 func main() {
+	// parse the session html file
+	t, _ = template.ParseFiles("./res/session.html")
 
 	// handle a request to /question
 	http.HandleFunc("/question", questionHandler)
 
 	// start a new "session"
-	http.HandleFunc("/session", sessionHandler)
+	http.HandleFunc("/session", newSessionHandler)
 
 	// handle a request to the root path
 	http.Handle("/", http.FileServer(http.Dir("./res")))

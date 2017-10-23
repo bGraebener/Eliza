@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-
         /* Taken from:  
         https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css */
+
         .page-bg {
             background: url("./background.jpg");
             filter: blur(5px);
@@ -30,13 +30,16 @@
     <div class="w3-container w3-margin">
 
         <h1 class="w3-text-white">Welcome to Eliza</h1>
-
+        <div class="w3-bar">
+            <a href="/" class="w3-bar-item w3-right w3-border w3-button w3-text-white w3-hover-black">New Session</a>
+            <a href="/about" class="w3-bar-item w3-right w3-border w3-button w3-text-white w3-hover-black">About</a>
+        </div>
         <form class="w3-container w3-margin-top" action="/session" method="POST">
 
             <label class="w3-text-white">Welcome! I am Eliza. Please tell me your name!</label>
             <input class="w3-input w3-border w3-margin-top" type="text" id="userNameInput" name="userNameInput" style="width: 400px"
                 placeholder="Please your name...">
-            <button class="w3-button w3-gray w3-hover-black w3-round-large w3-margin-top" type="submit" >Enter Name</button>
+            <button class="w3-button w3-gray w3-hover-black w3-margin-top" type="submit">Enter Name</button>
 
         </form>
 
