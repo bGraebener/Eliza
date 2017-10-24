@@ -1,15 +1,25 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"strings"
+	"time"
 )
 
 type data struct {
 	Username string
+	Greeting string
+	Quit     bool
 }
+
+var elizaGreetings []string
+var elizaFarewells []string
+var userFarewells map[string]int
 
 var tmpData data
 var t *template.Template
@@ -18,13 +28,19 @@ var t *template.Template
 func questionHandler(w http.ResponseWriter, r *http.Request) {
 	// retrieve the header value for the field "user-question"
 	question := r.Header.Get("user-question")
+	question = strings.ToLower(question)
 
 	// pass the username to be used in the chat window
 	w.Header().Set("userName", tmpData.Username)
 
-	question = strings.ToUpper(question)
-
-	if len(question) > 0 {
+	// check if user quit the session
+	if _, ok := userFarewells[question]; ok {
+		// choose a random farewell phrase
+		w.Header().Set("quit", "true")
+		fmt.Fprintf(w, "%s", elizaFarewells[rand.Intn(len(elizaFarewells))])
+		// tmpData.Quit = true
+		// otherwise proceed
+	} else if len(question) > 0 {
 		fmt.Fprintf(w, "%s", question)
 	}
 }
@@ -38,12 +54,54 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 	if len(tmpData.Username) < 1 {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
+	// choose a random greeting from the greetings slice
+	ran := rand.Intn(len(elizaGreetings))
+	tmpData.Greeting = elizaGreetings[ran]
 
 	// execute the html file
 	t.Execute(w, &tmpData)
 }
 
+// loads the resources from the json file
+func loadResources() {
+
+	dataMap := make(map[string][]string)
+
+	// read the json file
+	raw, err := ioutil.ReadFile("./res/elizaData.json")
+	if err != nil {
+		panic("Couldn't read resource file!")
+	}
+
+	// parse the json data
+	if err := json.Unmarshal(raw, &dataMap); err != nil {
+		panic("Couldn't parse json file")
+	}
+
+	// split individual string data in the correct containers
+	elizaGreetings = dataMap["elizaGreetings"]
+	elizaFarewells = dataMap["elizaFarewells"]
+	userFarewells = sliceToMap(dataMap["userFarewells"])
+
+}
+
+// converts a string slice into a map, convience function for faster, easier lookup of keywords and responses
+func sliceToMap(slice []string) map[string]int {
+
+	tmpMap := make(map[string]int)
+
+	for _, i := range slice {
+		tmpMap[i]++
+	}
+	return tmpMap
+}
+
 func main() {
+
+	rand.Seed(time.Now().UTC().UnixNano())
+	loadResources()
+	// fmt.Println(farewells)
+
 	// parse the session html file
 	t, _ = template.ParseFiles("./res/session.html")
 
