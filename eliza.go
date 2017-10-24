@@ -1,14 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"math/rand"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/bGraebener/Eliza/elizaHelper"
 )
 
 type data struct {
@@ -63,43 +63,45 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // loads the resources from the json file
-func loadResources() {
+// func loadResources() map[string][]string {
 
-	dataMap := make(map[string][]string)
+// 		dataMap := make(map[string][]string)
 
-	// read the json file
-	raw, err := ioutil.ReadFile("./res/elizaData.json")
-	if err != nil {
-		panic("Couldn't read resource file!")
-	}
+// 		// read the json file
+// 		raw, err := ioutil.ReadFile("./res/elizaData.json")
+// 		if err != nil {
+// 			panic("Couldn't read resource file!")
+// 		}
 
-	// parse the json data
-	if err := json.Unmarshal(raw, &dataMap); err != nil {
-		panic("Couldn't parse json file")
-	}
+// 		// parse the json data
+// 		if err := json.Unmarshal(raw, &dataMap); err != nil {
+// 			panic("Couldn't parse json file")
+// 		}
+// 		return dataMap
 
-	// split individual string data in the correct containers
-	elizaGreetings = dataMap["elizaGreetings"]
-	elizaFarewells = dataMap["elizaFarewells"]
-	userFarewells = sliceToMap(dataMap["userFarewells"])
+// 	}
 
-}
+// // converts a string slice into a map, convience function for faster, easier lookup of keywords and responses
+// func sliceToMap(slice []string) map[string]int {
 
-// converts a string slice into a map, convience function for faster, easier lookup of keywords and responses
-func sliceToMap(slice []string) map[string]int {
+// 	tmpMap := make(map[string]int)
 
-	tmpMap := make(map[string]int)
-
-	for _, i := range slice {
-		tmpMap[i]++
-	}
-	return tmpMap
-}
+// 	for _, i := range slice {
+// 		tmpMap[i]++
+// 	}
+// 	return tmpMap
+// }
 
 func main() {
 
 	rand.Seed(time.Now().UTC().UnixNano())
-	loadResources()
+	// load resources from resources file
+	dataMap := elizaHelper.LoadResources()
+
+	// split individual string data in the correct containers
+	elizaGreetings = dataMap["elizaGreetings"]
+	elizaFarewells = dataMap["elizaFarewells"]
+	userFarewells = elizaHelper.SliceToMap(dataMap["userFarewells"])
 	// fmt.Println(farewells)
 
 	// parse the session html file

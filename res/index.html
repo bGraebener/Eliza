@@ -26,29 +26,33 @@
 </head>
 
 <body>
+    <!-- container for the background picture -->
     <div class="page-bg"></div>
 
+    <!-- header bar -->
     <header class="w3-bar w3-light-gray w3-opacity" style="width:100%">
         <a href="/about" class="w3-bar-item w3-right w3-border w3-button w3-margin">About</a>
     </header>
 
+    <!-- main container -->
     <div class="w3-container w3-margin">
         <h1 class="w3-text-white">Welcome to Eliza</h1>
 
+        <!-- form with an textinput for the user name and a button to submit -->
         <form class="w3-container w3-margin-top" action="/session" method="POST">
-
             <label class="w3-text-white">Welcome! I am Eliza. Please tell me your name!</label>
             <input class="w3-input w3-border w3-margin-top" type="text" id="userNameInput" name="userNameInput" style="width: 400px"
                 placeholder="Please your name...">
             <button class="w3-button w3-gray w3-hover-black w3-margin-top" type="submit">Enter Name</button>
-
         </form>
     </div>
-    <footer class="w3-bar w3-light-gray w3-opacity" style="position:fixed; bottom:0; width:100%">
 
+    <!-- footer -->
+    <footer class="w3-bar w3-light-gray w3-opacity" style="position:fixed; bottom:0; width:100%">
         <p class="w3-center">Bastian Graebener - G00340600 - Eliza Chatbot - Data Representation and Querying</p>
     </footer>
 
+    <!-- script source -->
     <script type="text/javascript" src="./script.js"></script>
 
 </body>

@@ -3,6 +3,8 @@
 function askQuestion() {
     var textarea = document.getElementById("chatBoxArea");
     var userText = document.getElementById("userTextInput").value;
+    // empty the user input text field
+    document.getElementById("userTextInput").value = "";
 
     // don't send request if user didn't enter text
     if (userText.length < 1) {
@@ -29,18 +31,27 @@ function askQuestion() {
     xhr.onreadystatechange = () => {
 
         if (xhr.readyState === 4 && xhr.status === 200) {
+            // retrieve the user name
             var userName = xhr.getResponseHeader("userName");
             if (xhr.responseText.length > 0) {
 
                 // append new text to the textarea and keep new text in view
                 textarea.value += "\n" + userName + ": " + userText + "\nEliza: " + xhr.responseText;
                 textarea.scrollTop = textarea.scrollHeight;
+
+                // disable the submit after the user quit the program
                 var quit = xhr.getResponseHeader("quit");
                 if (quit === "true") {
-                    document.getElementById("userTextInput").style = "display:none";
+                    document.getElementById("questionButton").disabled = true;
                 }
             }
         }
     }
 }
 
+document.getElementById("userTextInput").addEventListener("keypress", (event) => {
+    if (event.which === 13) {
+        askQuestion();
+    }
+    // console.log(event.which);
+});
