@@ -41,7 +41,7 @@ function askQuestion() {
                 textarea.value += "\n" + userName + ": " + userText + "\nEliza: " + xhr.responseText;
                 textarea.scrollTop = textarea.scrollHeight;
 
-                // disable the submit if the user quit the program
+                // disable the submit button if the user quit the program
                 questionButton.disabled = xhr.getResponseHeader("quit") === "true";
 
             }
