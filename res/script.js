@@ -3,6 +3,8 @@
 function askQuestion() {
     var textarea = document.getElementById("chatBoxArea");
     var userText = document.getElementById("userTextInput").value;
+    var questionButton = document.getElementById("questionButton");
+
     // empty the user input text field
     document.getElementById("userTextInput").value = "";
 
@@ -39,16 +41,14 @@ function askQuestion() {
                 textarea.value += "\n" + userName + ": " + userText + "\nEliza: " + xhr.responseText;
                 textarea.scrollTop = textarea.scrollHeight;
 
-                // disable the submit after the user quit the program
-                var quit = xhr.getResponseHeader("quit");
-                if (quit === "true") {
-                    document.getElementById("questionButton").disabled = true;
-                }
+                // disable the submit if the user quit the program
+                questionButton.disabled = xhr.getResponseHeader("quit") === "true";
+
             }
         }
     }
 }
-
+// if user input text field is in focus allow enter key to trigger the ask question function
 document.getElementById("userTextInput").addEventListener("keypress", (event) => {
     if (event.which === 13) {
         askQuestion();

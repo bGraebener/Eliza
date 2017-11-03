@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bGraebener/Eliza/elizaHelper"
+	"github.com/ihkbm/GMIT/Project/elizaHelper"
 )
 
 type data struct {

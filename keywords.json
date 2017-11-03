@@ -49,7 +49,7 @@
         "rank": 5,
         "decomp": [
             {
-                "value": "i .* remember .",
+                "value": "i.* remember .",
                 "responses": [
                     "Do you often think of %s?",
                     "Does thinking of %s bring anything else to mind?",
