@@ -39,9 +39,12 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("quit", "true")
 		fmt.Fprintf(w, "%s", elizaFarewells[rand.Intn(len(elizaFarewells))])
 		// tmpData.Quit = true
-		// otherwise proceed
+		// otherwise get an appropriate response from Eliza
 	} else if len(question) > 0 {
-		fmt.Fprintf(w, "%s", question)
+
+		response := elizaHelper.GetResponse(question)
+
+		fmt.Fprintf(w, "%s", response)
 	}
 }
 
