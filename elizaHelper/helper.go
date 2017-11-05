@@ -40,6 +40,12 @@ func (r keyWords) Swap(r1, r2 int) {
 // global variable that holds all keywords contained in keywords.json
 var elizaData keyWords
 
+// map of words to be substituted
+var substitutions = map[string]string{
+	"my": "your",
+	"i":  "you",
+}
+
 // LoadResources loads the resources from the json file
 func LoadResources() map[string][]string {
 
@@ -127,26 +133,47 @@ func getKeyWordList(userInput string) (keyWordList keyWords) {
 // returns a random response from the pool of responses for the specific decomposition pattern of the keyword
 func findDecompPatterns(userInput string, keyWordList []KeyWord) string {
 	rand.Seed(time.Now().UTC().UnixNano())
+	var response string
 	// iterate over the all the keywords found in the user input string
 	for _, keyWord := range keyWordList {
 		// for every keyword iterate over all the decomposition patterns
 		for _, decomp := range keyWord.Decomp {
-			fmt.Println(decomp.DisAssRule)
+			// fmt.Println(decomp.DisAssRule)
 			// compile the decomposition pattern into a regular expression
 			reg, err := regexp.Compile(decomp.DisAssRule)
 			if err != nil {
 				log.Fatal(err)
 			}
+			fragments := reg.FindStringSubmatch(userInput)
 
+			// fmt.Println(reg)
+			// fmt.Println(len(fragments))
+			fmt.Println(fragments)
+			fmt.Println(userInput)
+			fmt.Println(keyWord)
+
+			response = decomp.Responses[rand.Intn(len(decomp.Responses))]
 			// if the decomposition pattern is found in the user input string return a random response from the set of responses for the decomposition pattern
-			if reg.MatchString(userInput) {
-				return decomp.Responses[rand.Intn(len(decomp.Responses))]
+			if len(fragments) > 1 && strings.Contains(userInput, fragments[0]) {
+				fragment := substitute(fragments[1])
+				response = fmt.Sprintf(response, fragment)
+				return response
 			}
 		}
+		return response
 	}
 
 	// if no keyword matches or no matching decomposition pattern is found fall back to a random response from the "xnone" keyword
-	// fmt.Println(elizaData[0].Decomp[0].Responses[rand.Intn(len(elizaData[0].Decomp[0].Responses))])
 	return elizaData[0].Decomp[0].Responses[rand.Intn(len(elizaData[0].Decomp[0].Responses))]
 
+}
+
+func substitute(fragment string) string {
+	words := strings.Split(fragment, " ")
+	for i, word := range words {
+		if _, ok := substitutions[word]; ok {
+			words[i] = substitutions[word]
+		}
+	}
+	return strings.Join(words, " ")
 }

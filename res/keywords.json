@@ -49,7 +49,7 @@
         "rank": 5,
         "decomp": [
             {
-                "value": "i.* remember .",
+                "value": "(?im)^\\s*i remember ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Do you often think of %s?",
                     "Does thinking of %s bring anything else to mind?",
@@ -61,19 +61,19 @@
                 ]
             },
             {
-                "value": ".*do you remember .",
+                "value": "(?im)^\\s*do you remember ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "Did you think I would forget (2) ?",
-                    "Why do you think I should recall (2) now ?",
-                    "What about (2) ?",
-                    "You mentioned (2) ?"
+                    "Did you think I would forget %s ?",
+                    "Why do you think I should recall %s now ?",
+                    "What about %s ?",
+                    "You mentioned %s ?"
                 ]
             },
             {
-                "value": ".*you remember .",
+                "value": "(?im)^\\s*you remember ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "How could I forget (2) ?",
-                    "What about (2) should I remember ?"
+                    "How could I forget %s ?",
+                    "What about %s should I remember ?"
                 ]
             }
         ]
@@ -83,26 +83,26 @@
         "rank": 5,
         "decomp": [
             {
-                "value": ".*i forget .",
+                "value": "(?im)^\\s*i forget ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Can you think of why you might forget (2) ?",
-                    "Why can't you remember (2) ?",
-                    "How often do you think of (2) ?",
+                    "Can you think of why you might forget %s ?",
+                    "Why can't you remember %s ?",
+                    "How often do you think of %s ?",
                     "Does it bother you to forget that ?",
                     "Could it be a mental block ?",
                     "Are you generally forgetful ?",
-                    "Do you think you are suppressing (2) ?"
+                    "Do you think you are suppressing %s ?"
                 ]
             },
             {
-                "value": ".*did you forget .",
+                "value": "(?im)^\\s*did you forget ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Why do you ask ?",
                     "Are you sure you told me ?",
-                    "Would it bother you if I forgot (2) ?",
-                    "Why should I recall (2) just now ?",
+                    "Would it bother you if I forgot %s ?",
+                    "Why should I recall %s just now ?",
                     "goto what",
-                    "Tell me more about (2)."
+                    "Tell me more about %s."
                 ]
             }
         ]
@@ -112,14 +112,14 @@
         "rank": 3,
         "decomp": [
             {
-                "value": ".*if .",
+                "value": "(?im)^\\s*if ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Do you think it's likely that (2) ?",
-                    "Do you wish that (2) ?",
-                    "What do you know about (2) ?",
-                    "Really, if (2) ?",
-                    "What would you do if (2) ?",
-                    "But what are the chances that (2) ?",
+                    "Do you think it's likely that %s ?",
+                    "Do you wish that %s ?",
+                    "What do you know about %s ?",
+                    "Really, if %s ?",
+                    "What would you do if %s ?",
+                    "But what are the chances that %s ?",
                     "What does this speculation lead to ?"
                 ]
             }
@@ -130,11 +130,11 @@
         "rank": 4,
         "decomp": [
             {
-                "value": ".*i dreamed .",
+                "value": "(?im)^\\s*i dreamed ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Really, (2) ?",
-                    "Have you ever fantasized (2) while you were awake ?",
-                    "Have you ever dreamed (2) before ?"
+                    "Really, %s ?",
+                    "Have you ever fantasized %s while you were awake ?",
+                    "Have you ever dreamed %s before ?"
                 ]
             }
         ]
@@ -220,12 +220,12 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*am i .",
+                "value": "(?im)^\\s*am i ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "Do you believe you are (2) ?",
-                    "Would you want to be (2) ?",
-                    "Do you wish I would tell you you are (2) ?",
-                    "What would it mean if you were (2) ?"
+                    "Do you believe you are %s ?",
+                    "Would you want to be %s ?",
+                    "Do you wish I would tell you you are %s ?",
+                    "What would it mean if you were %s ?"
                 ]
             },
             {
@@ -242,32 +242,26 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*are you .",
+                "value": "(?im)^\\s*are you ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "Why are you interested in whether I am (2) or not ?",
-                    "Would you prefer if I weren't (2) ?",
-                    "Perhaps I am (2) in your fantasies.",
-                    "Do you sometimes think I am (2) ?",
+                    "Why are you interested in whether I am %s or not ?",
+                    "Would you prefer if I weren't %s ?",
+                    "Perhaps I am %s in your fantasies.",
+                    "Do you sometimes think I am %s ?",
                     "goto what",
                     "Would it matter to you ?",
-                    "What if I were (2) ?"
+                    "What if I were %s ?"
                 ]
             },
             {
-                "value": ".*you are .",
+                "value": "(?im)^\\s*are ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "goto you"
-                ]
-            },
-            {
-                "value": ".*are .",
-                "responses": [
-                    "Did you think they might not be (2) ?",
-                    "Would you like it if they were not (2) ?",
-                    "What if they were not (2) ?",
-                    "Are they always (2) ?",
-                    "Possibly they are (2).",
-                    "Are you positive they are (2) ?"
+                    "Did you think they might not be %s ?",
+                    "Would you like it if they were not %s ?",
+                    "What if they were not %s ?",
+                    "Are they always %s ?",
+                    "Possibly they are %s.",
+                    "Are you positive they are %s ?"
                 ]
             }
         ]
@@ -277,14 +271,14 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*your .",
+                "value": "(?im)^\\s*your ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Why are you concerned over my (2) ?",
-                    "What about your own (2) ?",
-                    "Are you worried about someone else's (2) ?",
-                    "Really, my (2) ?",
-                    "What makes you think of my (2) ?",
-                    "Do you want my (2) ?"
+                    "Why are you concerned over my %s ?",
+                    "What about your own %s ?",
+                    "Are you worried about someone else's %s ?",
+                    "Really, my %s ?",
+                    "What makes you think of my %s ?",
+                    "Do you want my %s ?"
                 ]
             }
         ]
@@ -294,31 +288,31 @@
         "rank": 2,
         "decomp": [
             {
-                "value": ".*was i .*",
+                "value": "(?im)^\\s*was i ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "What if you were (2) ?",
-                    "Do you think you were (2) ?",
-                    "Were you (2) ?",
-                    "What would it mean if you were (2) ?",
-                    "What does ' (2) ' suggest to you ?"
+                    "What if you were %s ?",
+                    "Do you think you were %s ?",
+                    "Were you %s ?",
+                    "What would it mean if you were %s ?",
+                    "What does ' %s ' suggest to you ?"
                 ]
             },
             {
-                "value": ".*i was .*",
+                "value": "(?im)^\\s*i was ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Were you really ?",
-                    "Why do you tell me you were (2) now ?",
-                    "Perhaps I already know you were (2)."
+                    "Why do you tell me you were %s now ?",
+                    "Perhaps I already know you were %s."
                 ]
             },
             {
-                "value": ".*was you .*",
+                "value": "(?im)^\\s*was you ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "Would you like to believe I was (2) ?",
-                    "What suggests that I was (2) ?",
+                    "Would you like to believe I was %s ?",
+                    "What suggests that I was %s ?",
                     "What do you think ?",
-                    "Perhaps I was (2).",
-                    "What if I had been (2) ?"
+                    "Perhaps I was %s.",
+                    "What if I had been %s ?"
                 ]
             }
         ]
@@ -328,103 +322,91 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*i @desire .*",
+                "value": "(?im)^\\s*i desire ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "What would it mean to you if you got (3) ?",
-                    "Why do you want (3) ?",
-                    "Suppose you got (3) soon.",
-                    "What if you never got (3) ?",
-                    "What would getting (3) mean to you ?",
-                    "What does wanting (3) have to do with this discussion ?"
+                    "What would it mean to you if you got %s ?",
+                    "Why do you want %s ?",
+                    "Suppose you got %s soon.",
+                    "What if you never got %s ?",
+                    "What would getting %s mean to you ?",
+                    "What does wanting %s have to do with this discussion ?"
                 ]
             },
             {
-                "value": ".*i am. @sad .*",
+                "value": "(?im)^\\s*i am. sad ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "I am sorry to hear that you are (3).",
-                    "Do you think coming here will help you not to be (3) ?",
-                    "I'm sure it's not pleasant to be (3).",
-                    "Can you explain what made you (3) ?"
+                    "I am sorry to hear that you are %s.",
+                    "Do you think coming here will help you not to be %s ?",
+                    "I'm sure it's not pleasant to be %s.",
+                    "Can you explain what made you %s ?"
                 ]
             },
             {
-                "value": ".*i am. @happy .*",
+                "value": "(?im)^\\s*i am. happy ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "How have I helped you to be (3) ?",
-                    "Has your treatment made you (3) ?",
-                    "What makes you (3) just now ?",
-                    "Can you explain why you are suddenly (3) ?"
+                    "How have I helped you to be %s ?",
+                    "Has your treatment made you %s ?",
+                    "What makes you %s just now ?",
+                    "Can you explain why you are suddenly %s ?"
                 ]
             },
             {
-                "value": ".*i was .*",
-                "responses": [
-                    "goto was"
-                ]
-            },
-            {
-                "value": ".*i @belief i .*",
+                "value": "(?im)^\\s*i believe i ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Do you really think so ?",
-                    "But you are not sure you (3).",
-                    "Do you really doubt you (3) ?"
+                    "But you are not sure you %s.",
+                    "Do you really doubt you %s ?"
                 ]
             },
             {
-                "value": ".*i. @belief .you .*",
+                "value": "(?im)^\\s*i am ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "goto you"
+                    "Is it because you are %s that you came to me ?",
+                    "How long have you been %s ?",
+                    "Do you believe it is normal to be %s ?",
+                    "Do you enjoy being %s ?",
+                    "Do you know anyone else who is %s ?"
                 ]
             },
             {
-                "value": ".*i am .*",
+                "value": "(?im)^\\s*i cannot ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Is it because you are (2) that you came to me ?",
-                    "How long have you been (2) ?",
-                    "Do you believe it is normal to be (2) ?",
-                    "Do you enjoy being (2) ?",
-                    "Do you know anyone else who is (2) ?"
-                ]
-            },
-            {
-                "value": ".*i @cannot .*",
-                "responses": [
-                    "How do you know that you can't (3) ?",
+                    "How do you know that you can't %s ?",
                     "Have you tried ?",
-                    "Perhaps you could (3) now.",
-                    "Do you really want to be able to (3) ?",
-                    "What if you could (3) ?"
+                    "Perhaps you could %s now.",
+                    "Do you really want to be able to %s ?",
+                    "What if you could %s ?"
                 ]
             },
             {
-                "value": ".*i don't .*",
+                "value": "(?im)^\\s*i don't ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Don't you really (2) ?",
-                    "Why don't you (2) ?",
-                    "Do you wish to be able to (2) ?",
+                    "Don't you really %s ?",
+                    "Why don't you %s ?",
+                    "Do you wish to be able to %s ?",
                     "Does that trouble you ?"
                 ]
             },
             {
-                "value": ".*i feel .*",
+                "value": "(?im)^\\s*i feel ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Tell me more about such feelings.",
-                    "Do you often feel (2) ?",
-                    "Do you enjoy feeling (2) ?",
-                    "Of what does feeling (2) remind you ?"
+                    "Do you often feel %s ?",
+                    "Do you enjoy feeling %s ?",
+                    "Of what does feeling %s remind you ?"
                 ]
             },
             {
-                "value": ".*i .* you .*",
+                "value": "(?im)^\\s*i .* you ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Perhaps in your fantasies we (2) each other.",
-                    "Do you wish to (2) me ?",
-                    "You seem to need to (2) me.",
-                    "Do you (2) anyone else ?"
+                    "Perhaps in your fantasies we %s each other.",
+                    "Do you wish to %s me ?",
+                    "You seem to need to %s me.",
+                    "Do you %s anyone else ?"
                 ]
             },
             {
-                "value": ".",
+                "value": ".*",
                 "responses": [
                     "You say (1) ?",
                     "Can you elaborate on that ?",
@@ -439,37 +421,31 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*you remind me of .*",
+                "value": "(?im)^\\s*you are ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "goto alike"
+                    "What makes you think I am %s ?",
+                    "Does it please you to believe I am %s ?",
+                    "Do you sometimes wish you were %s ?",
+                    "Perhaps you would like to be %s."
                 ]
             },
             {
-                "value": ".*you are .*",
+                "value": "(?im)^\\s*you. me ([^\\?]*)\\?*\\s*$*",
                 "responses": [
-                    "What makes you think I am (2) ?",
-                    "Does it please you to believe I am (2) ?",
-                    "Do you sometimes wish you were (2) ?",
-                    "Perhaps you would like to be (2)."
+                    "Why do you think I %s you ?",
+                    "You like to think I %s you -- don't you ?",
+                    "What makes you think I %s you ?",
+                    "Really, I %s you ?",
+                    "Do you wish to believe I %s you ?",
+                    "Suppose I did %s you -- what would that mean ?",
+                    "Does someone else believe I %s you ?"
                 ]
             },
             {
-                "value": ".*you. me .*",
-                "responses": [
-                    "Why do you think I (2) you ?",
-                    "You like to think I (2) you -- don't you ?",
-                    "What makes you think I (2) you ?",
-                    "Really, I (2) you ?",
-                    "Do you wish to believe I (2) you ?",
-                    "Suppose I did (2) you -- what would that mean ?",
-                    "Does someone else believe I (2) you ?"
-                ]
-            },
-            {
-                "value": ".*you .*",
+                "value": "(?im)^\\s*you ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "We were discussing you -- not me.",
-                    "Oh, I (2) ?",
+                    "Oh, I %s ?",
                     "You're not really talking about me -- are you ?",
                     "What are your feelings now ?"
                 ]
@@ -496,10 +472,10 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*no one.*",
+                "value": "(?im)^\\s*no one ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Are you sure, no one (2) ?",
-                    "Surely someone (2) .",
+                    "Are you sure, no one %s ?",
+                    "Surely someone %s .",
                     "Can you think of anyone at all ?",
                     "Are you thinking of a very special person ?",
                     "Who, may I ask ?",
@@ -523,30 +499,30 @@
         "rank": 2,
         "decomp": [
             {
-                "value": "$ . my .",
+                "value": "(?im)^\\s*my ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Does that have anything to do with the fact that your (2) ?",
-                    "Lets discuss further why your (2).",
-                    "Earlier you said your (2).",
-                    "But your (2)."
+                    "Does that have anything to do with the fact that your %s ?",
+                    "Lets discuss further why your %s.",
+                    "Earlier you said your %s.",
+                    "But your %s."
                 ]
             },
             {
-                "value": ".*my.* @family.*",
+                "value": "(?im)^\\s*my.* family ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Tell me more about your family.",
-                    "Who else in your family (4) ?",
-                    "Your (3) ?",
-                    "What else comes to your mind when you think of your (3) ?"
+                    "Who else in your family %s ?",
+                    "Your %s ?",
+                    "What else comes to your mind when you think of your %s ?"
                 ]
             },
             {
-                "value": ".*my.*",
+                "value": "(?im)^\\s*my ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Your (2) ?",
-                    "Why do you say your (2) ?",
+                    "Your %s ?",
+                    "Why do you say your %s ?",
                     "Does that suggest anything else which belongs to you ?",
-                    "Is it important to you that your (2) ?"
+                    "Is it important to you that your %s ?"
                 ]
             }
         ]
@@ -556,19 +532,19 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*can you .",
+                "value": "(?im)^\\s*can you ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "You believe I can (2) don't you ?",
-                    "You want me to be able to (2).",
-                    "Perhaps you would like to be able to (2) yourself."
+                    "You believe I can %s don't you ?",
+                    "You want me to be able to %s.",
+                    "Perhaps you would like to be able to %s yourself."
                 ]
             },
             {
-                "value": ".*can i .",
+                "value": "(?im)^\\s*can i ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "Whether or not you can (2) depends on you more than on me.",
-                    "Do you want to be able to (2) ?",
-                    "Perhaps you don't want to (2)."
+                    "Whether or not you can %s depends on you more than on me.",
+                    "Do you want to be able to %s ?",
+                    "Perhaps you don't want to %s."
                 ]
             }
         ]
@@ -598,7 +574,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "value": ".",
                 "responses": [
                     "Is that the real reason ?",
                     "Don't any other reasons come to mind ?",
@@ -613,28 +589,22 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*why don't you .*",
+                "value": "(?im)^\\s*why don't you ([^\\?]*)\\?*\\s*$*",
                 "responses": [
-                    "Do you believe I don't (2) ?",
-                    "Perhaps I will (2) in good time.",
-                    "Should you (2) yourself ?",
-                    "You want me to (2) ?",
+                    "Do you believe I don't %s ?",
+                    "Perhaps I will %s in good time.",
+                    "Should you %s yourself ?",
+                    "You want me to %s ?",
                     "goto what"
                 ]
             },
             {
-                "value": "* why can't i *",
+                "value": "(?im)^\\s*why can't i ([^\\?]*)\\?*\\s*$",
                 "responses": [
-                    "Do you think you should be able to (2) ?",
-                    "Do you want to be able to (2) ?",
-                    "Do you believe this will help you to (2) ?",
-                    "Have you any idea why you can't (2) ?",
-                    "goto what"
-                ]
-            },
-            {
-                "value": "*",
-                "responses": [
+                    "Do you think you should be able to %s ?",
+                    "Do you want to be able to %s ?",
+                    "Do you believe this will help you to %s ?",
+                    "Have you any idea why you can't %s ?",
                     "goto what"
                 ]
             }
@@ -645,10 +615,10 @@
         "rank": 2,
         "decomp": [
             {
-                "value": ".* @everyone .*",
+                "value": "(?im)^\\s*@everyone ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Really, (2) ?",
-                    "Surely not (2).",
+                    "Really, %s ?",
+                    "Surely not %s.",
                     "Can you think of anyone in particular ?",
                     "Who, for example?",
                     "Are you thinking of a very special person ?",
@@ -661,47 +631,11 @@
         ]
     },
     {
-        "keyword": "everybody",
-        "rank": 2,
-        "decomp": [
-            {
-                "value": "*",
-                "responses": [
-                    "goto everyone"
-                ]
-            }
-        ]
-    },
-    {
-        "keyword": "nobody",
-        "rank": 2,
-        "decomp": [
-            {
-                "value": "*",
-                "responses": [
-                    "goto everyone"
-                ]
-            }
-        ]
-    },
-    {
-        "keyword": "noone",
-        "rank": 2,
-        "decomp": [
-            {
-                "value": "*",
-                "responses": [
-                    "goto everyone"
-                ]
-            }
-        ]
-    },
-    {
         "keyword": "always",
         "rank": 1,
         "decomp": [
             {
-                "value": "*",
+                "value": ".",
                 "responses": [
                     "Can you think of a specific example ?",
                     "When ?",
@@ -716,7 +650,7 @@
         "rank": 10,
         "decomp": [
             {
-                "value": "*",
+                "value": ".",
                 "responses": [
                     "In what way ?",
                     "What resemblence do you see ?",
@@ -731,23 +665,11 @@
         ]
     },
     {
-        "keyword": "like",
-        "rank": 10,
-        "decomp": [
-            {
-                "value": "* @be *like *",
-                "responses": [
-                    "goto alike"
-                ]
-            }
-        ]
-    },
-    {
         "keyword": "different",
         "rank": 0,
         "decomp": [
             {
-                "value": "*",
+                "value": ".",
                 "responses": [
                     "How is it different ?",
                     "What differences do you see ?",
