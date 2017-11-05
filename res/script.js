@@ -28,7 +28,7 @@ function askQuestion() {
     // send the request
     xhr.send();
 
-    // handler for all changes off the request ready state
+    // handler for all changes of the request ready state
     // only do something if response is available 
     xhr.onreadystatechange = () => {
 
@@ -53,5 +53,4 @@ document.getElementById("userTextInput").addEventListener("keypress", (event) =>
     if (event.which === 13) {
         askQuestion();
     }
-    // console.log(event.which);
 });

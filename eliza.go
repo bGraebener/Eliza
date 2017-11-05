@@ -30,22 +30,20 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 	question := r.Header.Get("user-question")
 	question = strings.ToLower(question)
 
-	// pass the username to be used in the chat window
-	w.Header().Set("userName", tmpData.Username)
-
 	// check if user quit the session
 	if _, ok := userFarewells[question]; ok {
 		// choose a random farewell phrase
 		w.Header().Set("quit", "true")
 		fmt.Fprintf(w, "%s", elizaFarewells[rand.Intn(len(elizaFarewells))])
-		// tmpData.Quit = true
-		// otherwise get an appropriate response from Eliza
-	} else if len(question) > 0 {
-
-		response := elizaHelper.GetResponse(question)
-
-		fmt.Fprintf(w, "%s", response)
 	}
+
+	// pass the username to be used in the chat window
+	w.Header().Set("userName", tmpData.Username)
+
+	// pass eliza response phrase to the responsewriter
+	response := elizaHelper.GetResponse(question)
+	fmt.Fprintf(w, "%s", response)
+
 }
 
 //function that starts a new "session" after the user put in a username

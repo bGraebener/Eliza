@@ -322,7 +322,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*i desire ([^\\.!]*)[\\.!]*\\s*$",
+                "value": "(?im)^\\s*i love ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "What would it mean to you if you got %s ?",
                     "Why do you want %s ?",
@@ -490,39 +490,6 @@
                     "You are being a bit negative.",
                     "Why not ?",
                     "Why 'no' ?"
-                ]
-            }
-        ]
-    },
-    {
-        "keyword": "my",
-        "rank": 2,
-        "decomp": [
-            {
-                "value": "(?im)^\\s*my ([^\\.!]*)[\\.!]*\\s*$",
-                "responses": [
-                    "Does that have anything to do with the fact that your %s ?",
-                    "Lets discuss further why your %s.",
-                    "Earlier you said your %s.",
-                    "But your %s."
-                ]
-            },
-            {
-                "value": "(?im)^\\s*my.* family ([^\\.!]*)[\\.!]*\\s*$",
-                "responses": [
-                    "Tell me more about your family.",
-                    "Who else in your family %s ?",
-                    "Your %s ?",
-                    "What else comes to your mind when you think of your %s ?"
-                ]
-            },
-            {
-                "value": "(?im)^\\s*my ([^\\.!]*)[\\.!]*\\s*$",
-                "responses": [
-                    "Your %s ?",
-                    "Why do you say your %s ?",
-                    "Does that suggest anything else which belongs to you ?",
-                    "Is it important to you that your %s ?"
                 ]
             }
         ]
