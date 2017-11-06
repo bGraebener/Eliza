@@ -33,18 +33,20 @@
                     <span>Welcome {{.Username}}! I am Eliza. {{.Greeting}}</span>
                 </div>
             </li>
+
+
         </ul>
 
-
         <!-- form with the chat window, a textinput for user input and a button to submit the question -->
-        <form class="w3-container w3-margin-top" onSubmit="return false;" style="position: fixed; bottom: 50px; width: 100%">
+        <form class="w3-container w3-margin-top" onSubmit="return false;" style="position: absolute; bottom: 50px; width: 100%">
             <!-- <textarea class="w3-input w3-text-white" name="chatBox" id="chatBoxArea" readonly wrap="soft" style="border: none;">Eliza: Welcome {{.Username}}! I am Eliza. {{.Greeting}}</textarea> -->
             <div class="w3-bar">
                 <input class="w3-input w3-border w3-bar-item w3-margin-top" type="text" id="userTextInput" name="userTextInput" style="width: 800px; float:left"
                     placeholder="Please enter a question...">
                 <span class="w3-bar-item w3-margin-top">
-                    <img src="right_arrow.png" alt="" class="w3-circle w3-white" id="questionButton" onclick="askQuestion()" style="width:45px"
+                    <img src="right_arrow.png" alt="" class="w3-circle w3-white" id="questionButton" onclick="askQuestion2()" style="width:45px"
                     />
+
                 </span>
             </div>
             <!-- <button class="w3-button w3-gray w3-hover-black w3-margin-top" id="questionButton" type="button" onclick="askQuestion()">Submit Question</button> -->
@@ -53,12 +55,63 @@
 
     <!-- footer -->
     <!-- <footer class="w3-bar w3-light-gray w3-opacity" style="position:fixed; bottom:0; "> -->
-    <footer class="w3-bar w3-light-gray w3-opacity" style="position: fixed; bottom: 0; width: 100%">
+    <footer class="w3-bar w3-light-gray w3-opacity w3-display-bottommiddle">
         <p class="w3-center">Bastian Graebener - G00340600 - Eliza Chatbot - Data Representation and Querying</p>
     </footer>
 
     <!-- script source -->
-    <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript">
+
+        var counter = 1;
+
+        function askQuestion2() {
+
+
+            var chatbox = document.getElementById("chatbox");
+
+            var newList = document.createElement("li");
+            newList.className = "w3-bar";
+            newList.style.border = "none";
+
+            var img = document.createElement("img");
+            img.style.width = "85px";
+            img.className = "w3-bar-item w3-circle";
+            img.src = "female_avatar.png";
+
+            var div = document.createElement("div");
+            div.className = "w3-bar-item";
+
+            var spanOne = document.createElement("span");
+            spanOne.className = "w3-large";
+            spanOne.innerText = "User";
+            var spanTwo = document.createElement("span");
+            spanTwo.innerText = "Welcome {{.Username}}! I am Eliza. {{.Greeting}}";
+
+            var br = document.createElement("br");
+
+
+            div.appendChild(spanOne);
+            div.appendChild(br);
+            div.appendChild(spanTwo);
+
+
+            if (counter % 2 === 0) {
+                newList.appendChild(img);
+                newList.appendChild(div);
+            } else {
+                newList.appendChild(img);
+                newList.appendChild(div);
+
+                div.style = "float:right";
+                img.style = "float:right; width:85px";
+                newList.style.textAlign = "right";
+            }
+            chatbox.appendChild(newList);
+            counter++;
+        }
+
+
+    </script>
 
 </body>
 
