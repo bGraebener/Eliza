@@ -24,7 +24,9 @@
     <div class="w3-container w3-margin">
         <h1 class="w3-text-white">Welcome to Eliza</h1>
 
-        <ul id="chatbox" class="w3-ul w3-text-white">
+        <hr>
+
+        <ul id="chatbox" class="w3-ul">
             <li class="w3-bar" style="border: none">
                 <img src="female_avatar.png" class="w3-bar-item w3-circle" style="width:85px">
                 <div class="w3-bar-item">
@@ -35,21 +37,22 @@
             </li>
         </ul>
 
-
-        <!-- form with the chat window, a textinput for user input and a button to submit the question -->
-        <form class="w3-container w3-margin-top" onSubmit="return false;" style="position: fixed; bottom: 50px; width: 100%">
-            <!-- <textarea class="w3-input w3-text-white" name="chatBox" id="chatBoxArea" readonly wrap="soft" style="border: none;">Eliza: Welcome {{.Username}}! I am Eliza. {{.Greeting}}</textarea> -->
-            <div class="w3-bar">
-                <input class="w3-input w3-border w3-bar-item w3-margin-top" type="text" id="userTextInput" name="userTextInput" style="width: 800px; float:left"
-                    placeholder="Please enter a question...">
-                <span class="w3-bar-item w3-margin-top">
-                    <img src="right_arrow.png" alt="" class="w3-circle w3-white" id="questionButton" onclick="askQuestion()" style="width:45px"
-                    />
-                </span>
-            </div>
-            <!-- <button class="w3-button w3-gray w3-hover-black w3-margin-top" id="questionButton" type="button" onclick="askQuestion()">Submit Question</button> -->
-        </form>
     </div>
+    <!-- form with the chat window, a textinput for user input and a button to submit the question -->
+    <form class="w3-container" onSubmit="return false;" style="position: fixed; bottom: 50px; width: 100%">
+        <!-- <textarea class="w3-input w3-text-white" name="chatBox" id="chatBoxArea" readonly wrap="soft" style="border: none;">Eliza: Welcome {{.Username}}! I am Eliza. {{.Greeting}}</textarea> -->
+        <div class="w3-bar">
+            <input class="w3-input w3-border w3-bar-item" type="text" id="userTextInput" name="userTextInput" style="width: 90%; float:left; margin-top: 6px;"
+                placeholder="Please enter a question...">
+            <span class="w3-bar-item">
+                <button id="questionButton" onclick="askQuestion()" class="w3-white">
+                    <img src="right_arrow.png" alt="" style="width:45px" />
+                </button>
+            </span>
+        </div>
+        <!-- <button class="w3-button w3-gray w3-hover-black w3-margin-top" id="questionButton" type="button" onclick="askQuestion()">Submit Question</button> -->
+    </form>
+
 
     <!-- footer -->
     <!-- <footer class="w3-bar w3-light-gray w3-opacity" style="position:fixed; bottom:0; "> -->

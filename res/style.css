@@ -24,3 +24,13 @@ textarea {
     background: none;
     resize: none;
 }
+
+#questionButton:hover{
+    cursor: pointer;
+
+}
+
+#chatbox li{
+    margin-bottom: 15px;
+    background-color: rgba(255,255,255,.6);
+}

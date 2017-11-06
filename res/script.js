@@ -91,7 +91,10 @@ function createListItem(name, msg) {
         div.style = "float:right";
         img.style = "float:right; width:85px";
         newList.style.textAlign = "right";
+        newList.style.backgroundColor = "rgba(31, 149, 208,.6)";
+        newList.className += " w3-text-white"
     }
+
     chatbox.appendChild(newList);
     counter++;
 
