@@ -25,12 +25,16 @@ textarea {
     resize: none;
 }
 
-#questionButton:hover{
-    cursor: pointer;
+    #questionButton:hover{
+        cursor: pointer;
+    }
 
+#chatbox {
+    width: 75%;
+    margin: 40px auto;
 }
 
-#chatbox li{
-    margin-bottom: 15px;
-    background-color: rgba(255,255,255,.6);
-}
+    #chatbox li{
+        margin-bottom: 15px;
+        background-color: rgba(255,255,255,.6);
+    }

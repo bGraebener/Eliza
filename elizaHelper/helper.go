@@ -42,8 +42,20 @@ var elizaData keyWords
 
 // map of words to be substituted
 var substitutions = map[string]string{
-	"my": "your",
-	"i":  "you",
+	"am":     "are",
+	"was":    "were",
+	"i":      "you",
+	"i'd":    "you would",
+	"i've":   "you have",
+	"i'll":   "you will",
+	"my":     "your",
+	"are":    "am",
+	"you've": "I have",
+	"you'll": "I will",
+	"your":   "my",
+	"yours":  "mine",
+	"you":    "me",
+	"me":     "you",
 }
 
 // LoadResources loads the resources from the json file
@@ -146,21 +158,27 @@ func findDecompPatterns(userInput string, keyWordList []KeyWord) string {
 			}
 			fragments := reg.FindStringSubmatch(userInput)
 
-			// fmt.Println(reg)
 			// fmt.Println(len(fragments))
 			fmt.Println(fragments)
 			fmt.Println(userInput)
-			fmt.Println(keyWord)
+			// fmt.Println(keyWord.Decomp)
+			if len(fragments) == 0 {
+				continue
+			}
 
 			response = decomp.Responses[rand.Intn(len(decomp.Responses))]
 			// if the decomposition pattern is found in the user input string return a random response from the set of responses for the decomposition pattern
 			if len(fragments) > 1 && strings.Contains(userInput, fragments[0]) {
+				fmt.Println(reg)
+
 				fragment := substitute(fragments[1])
 				response = fmt.Sprintf(response, fragment)
 				return response
+			} else if len(fragments) == 1 {
+				return response
 			}
 		}
-		return response
+		// return response
 	}
 
 	// if no keyword matches or no matching decomposition pattern is found fall back to a random response from the "xnone" keyword

@@ -11,14 +11,18 @@ import (
 	"github.com/bGraebener/Eliza/elizaHelper"
 )
 
+// struct that holds the data to be injected into the template
 type data struct {
 	Username string
 	Greeting string
 	Quit     bool
 }
 
+// arrays that hold strings for greeting the user and responses after the user quit the program
 var elizaGreetings []string
 var elizaFarewells []string
+
+// options for the user to quit the program
 var userFarewells map[string]int
 
 var tmpData data
@@ -31,10 +35,13 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 	question = strings.ToLower(question)
 
 	// check if user quit the session
-	if _, ok := userFarewells[question]; ok {
-		// choose a random farewell phrase
-		w.Header().Set("quit", "true")
-		fmt.Fprintf(w, "%s", elizaFarewells[rand.Intn(len(elizaFarewells))])
+	for _, word := range strings.Split(question, " ") {
+		if _, ok := userFarewells[word]; ok {
+			// choose a random farewell phrase
+			w.Header().Set("quit", "true")
+			fmt.Fprintf(w, "%s", elizaFarewells[rand.Intn(len(elizaFarewells))])
+			return
+		}
 	}
 
 	// pass the username to be used in the chat window
@@ -62,36 +69,6 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 	// execute the html file
 	t.Execute(w, &tmpData)
 }
-
-// loads the resources from the json file
-// func loadResources() map[string][]string {
-
-// 		dataMap := make(map[string][]string)
-
-// 		// read the json file
-// 		raw, err := ioutil.ReadFile("./res/elizaData.json")
-// 		if err != nil {
-// 			panic("Couldn't read resource file!")
-// 		}
-
-// 		// parse the json data
-// 		if err := json.Unmarshal(raw, &dataMap); err != nil {
-// 			panic("Couldn't parse json file")
-// 		}
-// 		return dataMap
-
-// 	}
-
-// // converts a string slice into a map, convience function for faster, easier lookup of keywords and responses
-// func sliceToMap(slice []string) map[string]int {
-
-// 	tmpMap := make(map[string]int)
-
-// 	for _, i := range slice {
-// 		tmpMap[i]++
-// 	}
-// 	return tmpMap
-// }
 
 func main() {
 

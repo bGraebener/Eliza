@@ -37,26 +37,27 @@ function askQuestion() {
             var userName = xhr.getResponseHeader("userName");
             if (xhr.responseText.length > 0) {
 
-                // append new text to the textarea and keep new text in view
+                // append new text to the window and keep new text in view
                 createListItem(userName, userText);
-                createListItem("Eliza", xhr.responseText);
+
+                var rand = Math.floor(Math.random() * 2000);
+                setTimeout(() => { createListItem("Eliza", xhr.responseText); }, rand)
 
                 // disable the submit button if the user quit the program
                 questionButton.disabled = xhr.getResponseHeader("quit") === "true";
+                document.getElementById("userTextInput").disabled = xhr.getResponseHeader("quit") === "true";
 
             }
         }
     }
 }
 
-var counter = 1;
-
 function createListItem(name, msg) {
 
     var chatbox = document.getElementById("chatbox");
 
     var newList = document.createElement("li");
-    newList.className = "w3-bar";
+    newList.className = "w3-bar w3-round-large";
     newList.style.border = "none";
 
     var img = document.createElement("img");
@@ -75,19 +76,15 @@ function createListItem(name, msg) {
 
     var br = document.createElement("br");
 
-
     div.appendChild(spanOne);
     div.appendChild(br);
     div.appendChild(spanTwo);
 
+    newList.appendChild(img);
+    newList.appendChild(div);
 
-    if (counter % 2 === 0) {
-        newList.appendChild(img);
-        newList.appendChild(div);
-    } else {
-        newList.appendChild(img);
-        newList.appendChild(div);
-
+    if (name != "Eliza") {
+        img.src = "male_avatar.png";
         div.style = "float:right";
         img.style = "float:right; width:85px";
         newList.style.textAlign = "right";
@@ -96,8 +93,6 @@ function createListItem(name, msg) {
     }
 
     chatbox.appendChild(newList);
-    counter++;
-
     window.scrollTo(0, document.body.scrollHeight);
 }
 // if user input text field is in focus allow enter key to trigger the ask question function
@@ -106,3 +101,4 @@ document.getElementById("userTextInput").addEventListener("keypress", (event) =>
         askQuestion();
     }
 });
+
