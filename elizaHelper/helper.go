@@ -156,6 +156,8 @@ func findDecompPatterns(userInput string, keyWordList []KeyWord) string {
 			if err != nil {
 				log.Fatal(err)
 			}
+
+			// check if the decomposition pattern is found in the user question and return the capture group values
 			fragments := reg.FindStringSubmatch(userInput)
 
 			// fmt.Println(len(fragments))
@@ -166,19 +168,29 @@ func findDecompPatterns(userInput string, keyWordList []KeyWord) string {
 				continue
 			}
 
+			// choose a random response
 			response = decomp.Responses[rand.Intn(len(decomp.Responses))]
+
+			// disregard everything caught by the regex capture group if the response doesn't need it or nothing was captured
+			if !strings.Contains(response, "%s") || len(fragments) == 1 {
+				return response
+			}
+
 			// if the decomposition pattern is found in the user input string return a random response from the set of responses for the decomposition pattern
 			if len(fragments) > 1 && strings.Contains(userInput, fragments[0]) {
 				fmt.Println(reg)
 
+				// reflect words like "my", "yours"
 				fragment := substitute(fragments[1])
+
+				// reassamble the response
 				response = fmt.Sprintf(response, fragment)
 				return response
-			} else if len(fragments) == 1 {
-				return response
 			}
+			// else if len(fragments) == 1 {
+			// 	return response
+			// }
 		}
-		// return response
 	}
 
 	// if no keyword matches or no matching decomposition pattern is found fall back to a random response from the "xnone" keyword

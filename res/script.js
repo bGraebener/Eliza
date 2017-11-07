@@ -46,6 +46,7 @@ function askQuestion() {
                 // disable the submit button if the user quit the program
                 questionButton.disabled = xhr.getResponseHeader("quit") === "true";
                 document.getElementById("userTextInput").disabled = xhr.getResponseHeader("quit") === "true";
+                document.getElementById("userTextInput").setAttribute("placeholder", "Please start a new session!");
 
             }
         }
@@ -90,6 +91,7 @@ function createListItem(name, msg) {
         newList.style.textAlign = "right";
         newList.style.backgroundColor = "rgba(31, 149, 208,.6)";
         newList.className += " w3-text-white"
+        newList.style.float = "right"
     }
 
     chatbox.appendChild(newList);

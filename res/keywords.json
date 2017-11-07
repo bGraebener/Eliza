@@ -578,10 +578,10 @@
         "rank": 2,
         "decomp": [
             {
-                "value": "(?im)^\\s*@everyone ([^\\.!]*)[\\.!]*\\s*$",
+                "value": "(?im)^\\s*everyone ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
-                    "Really, %s?",
-                    "Surely not %s.",
+                    "Really, everyone %s?",
+                    "Surely not everyone %s.",
                     "Can you think of anyone in particular?",
                     "Who, for example?",
                     "Are you thinking of a very special person?",
