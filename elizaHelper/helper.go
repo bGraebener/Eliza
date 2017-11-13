@@ -21,7 +21,7 @@ type KeyWord struct {
 
 // Decomp holds the decomposition regular expression pattern and an array of associated responses
 type Decomp struct {
-	DisAssRule string   `json:"value"`
+	DisAssRule string   `json:"rule"`
 	Responses  []string `json:"responses"`
 }
 

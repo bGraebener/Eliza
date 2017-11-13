@@ -4,7 +4,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "I'm not sure I understand you fully.",
                     "Please go on.",
@@ -22,7 +22,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Please don't apologise.",
                     "Apologies are not necessary.",
@@ -37,7 +37,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "You don't need to apologise"
                 ]
@@ -49,7 +49,7 @@
         "rank": 5,
         "decomp": [
             {
-                "value": "(?im)^\\s*i remember ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i remember ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Do you often think of %s?",
                     "Does thinking of %s bring anything else to mind?",
@@ -61,7 +61,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*do you remember ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*do you remember ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Did you think I would forget %s?",
                     "Why do you think I should recall %s now?",
@@ -70,7 +70,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*you remember ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*you remember ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "How could I forget %s?",
                     "What about %s should I remember?"
@@ -83,7 +83,7 @@
         "rank": 5,
         "decomp": [
             {
-                "value": "(?im)^\\s*i forget ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i forget ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Can you think of why you might forget %s?",
                     "Why can't you remember %s?",
@@ -95,7 +95,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*did you forget ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*did you forget ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Why do you ask?",
                     "Are you sure you told me?",
@@ -111,7 +111,7 @@
         "rank": 3,
         "decomp": [
             {
-                "value": "(?im)^\\s*if ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*if ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Do you think it's likely that %s?",
                     "Do you wish that %s?",
@@ -129,7 +129,7 @@
         "rank": 4,
         "decomp": [
             {
-                "value": "(?im)^\\s*i dreamed ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i dreamed ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Really, %s?",
                     "Have you ever fantasized %s while you were awake?",
@@ -143,7 +143,7 @@
         "rank": 3,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "What does that dream suggest to you?",
                     "Do you dream often?",
@@ -158,7 +158,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "You don't seem quite certain.",
                     "Why the uncertain tone?",
@@ -175,7 +175,7 @@
         "rank": 15,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "I am not interested in names.",
                     "I've told you before, I don't care about names -- please continue."
@@ -188,7 +188,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "How do you do.  Please state your problem.",
                     "Hi.  What seems to be your problem?"
@@ -201,7 +201,7 @@
         "rank": 50,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Do computers worry you?",
                     "Why do you mention computers?",
@@ -219,7 +219,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*am i ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*am i ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Do you believe you are %s?",
                     "Would you want to be %s?",
@@ -228,7 +228,7 @@
                 ]
             },
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Why do you say 'am'?",
                     "I don't understand that."
@@ -241,7 +241,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*are you ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*are you ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Why are you interested in whether I am %s or not?",
                     "Would you prefer if I weren't %s?",
@@ -252,7 +252,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*are ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*are ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Did you think they might not be %s?",
                     "Would you like it if they were not %s?",
@@ -269,7 +269,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*your ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*your ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Why are you concerned over my %s?",
                     "What about your own %s?",
@@ -286,7 +286,7 @@
         "rank": 2,
         "decomp": [
             {
-                "value": "(?im)^\\s*was i ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*was i ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "What if you were %s?",
                     "Do you think you were %s?",
@@ -296,7 +296,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i was ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i was ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Were you really %s?",
                     "Why do you tell me you were %s now?",
@@ -304,7 +304,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*was you ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*was you ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Would you like to believe I was %s?",
                     "What suggests that I was %s?",
@@ -320,7 +320,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*i love ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i love ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "What would it mean to you if you got %s?",
                     "Why do you want %s?",
@@ -331,7 +331,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i am.* sad ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i(?:'|\\sa)m(.* sad([^\\.!]*))[\\.!]*\\s*$",
                 "responses": [
                     "I am sorry to hear that you are %s.",
                     "Do you think coming here will help you not to be %s?",
@@ -340,7 +340,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i am.* happy ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i(?:'|\\sa)m(.* happy([^\\.!]*))[\\.!]*\\s*$",
                 "responses": [
                     "How have I helped you to be %s?",
                     "Has your treatment made you %s?",
@@ -349,7 +349,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i believe i ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i believe i ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Do you really think so?",
                     "But you are not sure you %s.",
@@ -357,7 +357,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i am ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i(?:'|\\sa)m([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Is it because you are %s that you came to me?",
                     "How long have you been %s?",
@@ -367,7 +367,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i cannot ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i can(?:'|\\s?no)t ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "How do you know that you can't %s?",
                     "Have you tried?",
@@ -377,7 +377,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i don't ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i do(?:n'|\\sno)t ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Don't you really %s?",
                     "Why don't you %s?",
@@ -386,7 +386,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i feel ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i feel ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Tell me more about such feelings.",
                     "Do you often feel %s?",
@@ -395,7 +395,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*i .* you ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i(.* you([^\\.!]*))[\\.!]*\\s*$",
                 "responses": [
                     "Perhaps in your fantasies we %s each other.",
                     "Do you wish to %s me?",
@@ -404,11 +404,11 @@
                 ]
             },
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
-                    "You say (1)?",
+                    "You say what?",
                     "Can you elaborate on that?",
-                    "Do you say (1) for some special reason?",
+                    "Do you say that for some special reason?",
                     "That's quite interesting."
                 ]
             }
@@ -419,7 +419,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*you are ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*you are ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "What makes you think I am %s?",
                     "Does it please you to believe I am %s?",
@@ -428,7 +428,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*you. me ([^\\?]*)\\?*\\s*$*",
+                "rule": "(?im)^\\s*you. me ([^\\?]*)\\?*\\s*$*",
                 "responses": [
                     "Why do you think I %s you?",
                     "You like to think I %s you -- don't you?",
@@ -440,7 +440,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*you ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*you ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "We were discussing you -- not me.",
                     "Oh, I %s?",
@@ -455,7 +455,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "You seem to be quite positive.",
                     "You are sure.",
@@ -470,7 +470,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*no one ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*no one ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Are you sure, no one %s?",
                     "Surely someone %s .",
@@ -482,7 +482,7 @@
                 ]
             },
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Are you saying no just to be negative?",
                     "You are being a bit negative.",
@@ -497,7 +497,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*can you ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*can you ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "You believe I can %s, don't you?",
                     "You want me to be able to %s.",
@@ -505,7 +505,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*can i ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*can i ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Whether or not you can %s depends on you more than on me.",
                     "Do you want to be able to %s?",
@@ -519,7 +519,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Why do you ask?",
                     "Does that question interest you?",
@@ -539,7 +539,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Is that the real reason?",
                     "Don't any other reasons come to mind?",
@@ -554,7 +554,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": "(?im)^\\s*why don't you ([^\\?]*)\\?*\\s*$*",
+                "rule": "(?im)^\\s*why don't you ([^\\?]*)\\?*\\s*$*",
                 "responses": [
                     "Do you believe I don't %s?",
                     "Perhaps I will %s in good time.",
@@ -563,7 +563,7 @@
                 ]
             },
             {
-                "value": "(?im)^\\s*why can't i ([^\\?]*)\\?*\\s*$",
+                "rule": "(?im)^\\s*why can't i ([^\\?]*)\\?*\\s*$",
                 "responses": [
                     "Do you think you should be able to %s?",
                     "Do you want to be able to %s?",
@@ -578,7 +578,7 @@
         "rank": 2,
         "decomp": [
             {
-                "value": "(?im)^\\s*everyone ([^\\.!]*)[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*everyone ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Really, everyone %s?",
                     "Surely not everyone %s.",
@@ -598,7 +598,7 @@
         "rank": 1,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "Can you think of a specific example?",
                     "When?",
@@ -613,7 +613,7 @@
         "rank": 10,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "In what way?",
                     "What resemblence do you see?",
@@ -632,7 +632,7 @@
         "rank": 0,
         "decomp": [
             {
-                "value": ".*",
+                "rule": ".*",
                 "responses": [
                     "How is it different?",
                     "What differences do you see?",
