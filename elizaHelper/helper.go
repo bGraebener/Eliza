@@ -19,7 +19,7 @@ type KeyWord struct {
 	Decomp  []Decomp
 }
 
-// Decomp holds the decomposition regular expression pattern and an array of associated responses
+// Decomp holds the regular expression pattern for decomposition and an array of associated responses
 type Decomp struct {
 	DisAssRule string   `json:"rule"`
 	Responses  []string `json:"responses"`
@@ -28,7 +28,7 @@ type Decomp struct {
 // keyWords redefines a slice of KeyWords
 type keyWords []KeyWord
 
-// defining functions so keyWords implements the sort interface
+// implementing the sort interface functions for the type keyWords
 func (r keyWords) Len() int { return len(r) }
 func (r keyWords) Less(r1, r2 int) bool {
 	return r[r1].Rank < r[r2].Rank
@@ -42,52 +42,23 @@ var elizaData keyWords
 
 // map of words to be substituted
 var substitutions = map[string]string{
-	"am":     "are",
-	"was":    "were",
-	"i":      "you",
-	"i'd":    "you would",
-	"i've":   "you have",
-	"i'll":   "you will",
-	"my":     "your",
-	"are":    "am",
-	"you've": "I have",
-	"you'll": "I will",
-	"your":   "my",
-	"yours":  "mine",
-	"you":    "me",
-	"me":     "you",
-}
-
-// LoadResources loads the resources from the json file
-func LoadResources() map[string][]string {
-
-	dataMap := make(map[string][]string)
-
-	// read the json file
-	raw, err := ioutil.ReadFile("./res/startEnd.json")
-	if err != nil {
-		panic("Couldn't read resource file!")
-	}
-
-	// parse the json data
-	if err := json.Unmarshal(raw, &dataMap); err != nil {
-		panic("Couldn't parse json file")
-	}
-
-	elizaData = readKeywordData()
-	return dataMap
-
-}
-
-// SliceToMap converts a string slice into a map, convience function for faster, easier lookup of keywords and responses
-func SliceToMap(slice []string) map[string]int {
-
-	tmpMap := make(map[string]int)
-
-	for _, i := range slice {
-		tmpMap[i]++
-	}
-	return tmpMap
+	"am":       "are",
+	"was":      "were",
+	"i":        "you",
+	"i'd":      "you would",
+	"i've":     "you have",
+	"i'll":     "you will",
+	"my":       "your",
+	"are":      "am",
+	"you've":   "I have",
+	"you'll":   "I will",
+	"your":     "my",
+	"yours":    "mine",
+	"you":      "me",
+	"me":       "you",
+	"myself":   "yourself",
+	"yourself": "myself",
+	"i'm":      "you are",
 }
 
 // GetResponse returns an appropriate response to the user input
@@ -99,6 +70,27 @@ func GetResponse(userInput string) string {
 
 }
 
+// LoadResources loads the resources from the json files
+func LoadResources() map[string][]string {
+
+	dataMap := make(map[string][]string)
+
+	// read the json file
+	if raw, err := ioutil.ReadFile("./res/startEnd.json"); err != nil {
+		log.Fatal("Couldn't read resource file!")
+	} else {
+
+		// parse the json data
+		if err := json.Unmarshal(raw, &dataMap); err != nil {
+			log.Fatal("Couldn't parse json file")
+		}
+	}
+
+	// load all keyword data into memory
+	elizaData = readKeywordData()
+	return dataMap
+}
+
 //parse the keyword data from the keyword.json file
 func readKeywordData() keyWords {
 	var list keyWords
@@ -108,7 +100,7 @@ func readKeywordData() keyWords {
 	} else {
 		// parse the json data into the special struct slice
 		if err = json.Unmarshal(raw, &list); err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
 	}
 	return list
@@ -119,10 +111,7 @@ func readKeywordData() keyWords {
 func getKeyWordList(userInput string) (keyWordList keyWords) {
 
 	// replace all non-letter characters with a whitespace
-	reg, err := regexp.Compile("[^a-zA-Z]+")
-	if err != nil {
-		log.Fatal(err)
-	}
+	reg := regexp.MustCompile("[^a-zA-Z]+")
 	userInput = reg.ReplaceAllString(userInput, " ")
 
 	// turn phrase string into string slice of individual words
@@ -146,64 +135,77 @@ func getKeyWordList(userInput string) (keyWordList keyWords) {
 func findDecompPatterns(userInput string, keyWordList []KeyWord) string {
 	rand.Seed(time.Now().UTC().UnixNano())
 	var response string
+
 	// iterate over the all the keywords found in the user input string
 	for _, keyWord := range keyWordList {
+
 		// for every keyword iterate over all the decomposition patterns
 		for _, decomp := range keyWord.Decomp {
-			// fmt.Println(decomp.DisAssRule)
+
 			// compile the decomposition pattern into a regular expression
 			reg, err := regexp.Compile(decomp.DisAssRule)
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			// check if the decomposition pattern is found in the user question and return the capture group values
-			fragments := reg.FindStringSubmatch(userInput)
-
-			// fmt.Println(len(fragments))
-			fmt.Println(fragments)
-			fmt.Println(userInput)
-			// fmt.Println(keyWord.Decomp)
-			if len(fragments) == 0 {
+			// check if the decomposition pattern is found in the user question and
+			// save the capture group values
+			captureGroup := reg.FindStringSubmatch(userInput)
+			// no matching substring found for this decomposition pattern
+			if len(captureGroup) == 0 {
 				continue
 			}
 
+			fmt.Println(keyWord.Keyword)
+			fmt.Println(decomp.DisAssRule)
 			// choose a random response
 			response = decomp.Responses[rand.Intn(len(decomp.Responses))]
 
-			// disregard everything caught by the regex capture group if the response doesn't need it or nothing was captured
-			if !strings.Contains(response, "%s") || len(fragments) == 1 {
+			// disregard regex capture group if the response doesn't need it
+			// or the capture group only contained the whole string
+			if !strings.Contains(response, "%s") || len(captureGroup) == 1 {
 				return response
 			}
 
-			// if the decomposition pattern is found in the user input string return a random response from the set of responses for the decomposition pattern
-			if len(fragments) > 1 && strings.Contains(userInput, fragments[0]) {
-				fmt.Println(reg)
+			// assemble a response with a randomly chosen response and the captured value
+			// from the user input
+			if len(captureGroup) > 1 && strings.Contains(userInput, captureGroup[0]) {
 
-				// reflect words like "my", "yours"
-				fragment := substitute(fragments[1])
+				// reflect any pronouns like "my", "yours"
+				captureGroupValue := substitute(captureGroup[1])
 
-				// reassamble the response
-				response = fmt.Sprintf(response, fragment)
-				return response
+				// reassamble the response and return it
+				return fmt.Sprintf(response, captureGroupValue)
 			}
-			// else if len(fragments) == 1 {
-			// 	return response
-			// }
 		}
 	}
 
-	// if no keyword matches or no matching decomposition pattern is found fall back to a random response from the "xnone" keyword
+	// if no keyword matches fall back to a random response from the "xnone" keyword
 	return elizaData[0].Decomp[0].Responses[rand.Intn(len(elizaData[0].Decomp[0].Responses))]
-
 }
 
-func substitute(fragment string) string {
-	words := strings.Split(fragment, " ")
+// Substitute takes a string, checks it against the pronouns map and substitutes any found pronouns for their counterpart
+func substitute(captureGroupValue string) string {
+	// get individual words
+	words := strings.Split(captureGroupValue, " ")
+	// iterate over every word and if the pronouns map contains it, switch it
 	for i, word := range words {
 		if _, ok := substitutions[word]; ok {
 			words[i] = substitutions[word]
 		}
 	}
+	// reassemble the string and return it
 	return strings.Join(words, " ")
+}
+
+// SliceToMap converts a string slice into a map,
+// convience function for faster, easier lookup of keywords and responses
+func SliceToMap(slice []string) map[string]int {
+
+	tmpMap := make(map[string]int)
+
+	for _, i := range slice {
+		tmpMap[i]++
+	}
+	return tmpMap
 }

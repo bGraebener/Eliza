@@ -395,7 +395,7 @@
                 ]
             },
             {
-                "rule": "(?im)^\\s*i(.* you([^\\.!]*))[\\.!]*\\s*$",
+                "rule": "(?im)^\\s*i \\b\\w*\\b{1} you ([^\\.!]*)[\\.!]*\\s*$",
                 "responses": [
                     "Perhaps in your fantasies we %s each other.",
                     "Do you wish to %s me?",
@@ -428,15 +428,15 @@
                 ]
             },
             {
-                "rule": "(?im)^\\s*you. me ([^\\?]*)\\?*\\s*$*",
+                "rule": "(?im)\\s*\\w*you(.* me)([^\\?]*)\\?*\\s*$*",
                 "responses": [
-                    "Why do you think I %s you?",
+                    "Why do you think I %s?",
                     "You like to think I %s you -- don't you?",
-                    "What makes you think I %s you?",
+                    "What makes you think I %s?",
                     "Really, I %s you?",
-                    "Do you wish to believe I %s you?",
+                    "Do you wish to believe I %s?",
                     "Suppose I did %s you -- what would that mean?",
-                    "Does someone else believe I %s you?"
+                    "Does someone else believe I %s?"
                 ]
             },
             {
