@@ -16,6 +16,7 @@ type data struct {
 	Username string
 	Greeting string
 	Quit     bool
+	NameSet  bool
 }
 
 // arrays that hold strings for greeting the user and responses after the user quit the program
@@ -38,19 +39,22 @@ func main() {
 	elizaGreetings = dataMap["elizaGreetings"]
 	elizaFarewells = dataMap["elizaFarewells"]
 	userFarewells = elizaHelper.SliceToMap(dataMap["userFarewells"])
-	// fmt.Println(farewells)
 
-	// parse the session html file
-	t, _ = template.ParseFiles("./res/session.html")
+	// parse the index html file
+	t, _ = template.ParseFiles("./index.html")
 
-	// handle a request to /question
-	http.HandleFunc("/question", questionHandler)
+	// function that gets executed at when the first request is made
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// set name to false so the name input form gets shown
+		tmpData.NameSet = false
+		t.Execute(w, &tmpData)
+	})
 
-	// start a new "session"
+	// start a new Eliza "session"
 	http.HandleFunc("/session", newSessionHandler)
 
-	// handle a request to the root path
-	http.Handle("/", http.FileServer(http.Dir("./res")))
+	// handle a request to /question that is being send when a question was submitted
+	http.HandleFunc("/question", questionHandler)
 
 	// listen for requests on port 8080
 	http.ListenAndServe(":8080", nil)
@@ -69,6 +73,7 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 	// choose a random greeting from the greetings slice
 	ran := rand.Intn(len(elizaGreetings))
 	tmpData.Greeting = elizaGreetings[ran]
+	tmpData.NameSet = true
 
 	// execute the html file
 	t.Execute(w, &tmpData)

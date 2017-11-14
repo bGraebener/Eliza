@@ -23,9 +23,20 @@
 
     <!-- main container -->
     <div class="w3-container">
-        <!-- <h1 class="w3-text-white">Welcome to Eliza</h1> -->
-        <hr>
 
+        <!-- ask for the users name  -->
+        {{if not .NameSet}}
+        <p class="w3-text-white">Welcome! I am Eliza. Please tell me your name!</p>
+
+        <!-- form with an textinput for the user name and a button to submit -->
+        <form class="w3-container w3-margin-top" action="/session" method="POST">
+            <input class="w3-input w3-border w3-margin-top" type="text" id="userNameInput" name="userNameInput" style="width: 400px"
+                placeholder="Please enter your name..." autofocus>
+            <button class="w3-button w3-gray w3-hover-black w3-margin-top" type="submit">Enter Name</button>
+        </form>
+        {{end}}
+
+        <hr> {{if .NameSet}}
         <ul id="chatbox" class="w3-ul">
             <li class="w3-bar w3-round-large" style="border: none">
                 <img src="female_avatar.png" class="w3-bar-item w3-circle" style="width:85px">
@@ -40,7 +51,6 @@
     </div>
     <!-- form with the chat window, a textinput for user input and a button to submit the question -->
     <form class="w3-container" onSubmit="return false;" style="position: fixed; bottom: 50px; width: 100%">
-        <!-- <textarea class="w3-input w3-text-white" name="chatBox" id="chatBoxArea" readonly wrap="soft" style="border: none;">Eliza: Welcome {{.Username}}! I am Eliza. {{.Greeting}}</textarea> -->
         <div class="w3-bar">
             <input class="w3-input w3-border w3-bar-item" type="text" id="userTextInput" name="userTextInput" style="width: 90%; float:left; margin-top: 6px;"
                 placeholder="Please enter a question..." autofocus>
@@ -50,12 +60,11 @@
                 </button>
             </span>
         </div>
-        <!-- <button class="w3-button w3-gray w3-hover-black w3-margin-top" id="questionButton" type="button" onclick="askQuestion()">Submit Question</button> -->
     </form>
 
+    {{end}}
 
     <!-- footer -->
-    <!-- <footer class="w3-bar w3-light-gray w3-opacity" style="position:fixed; bottom:0; "> -->
     <footer class="w3-bar w3-light-gray w3-opacity" style="position: fixed; bottom: 0; width: 100%">
         <p class="w3-center">Bastian Graebener - G00340600 - Eliza Chatbot - Data Representation and Querying</p>
     </footer>
