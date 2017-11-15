@@ -1,57 +1,19 @@
 
-// function that gets executed on the button click
-function askQuestion() {
-    var textarea = document.getElementById("chatBoxArea");
-    var userText = document.getElementById("userTextInput").value;
-    var questionButton = document.getElementById("questionButton");
+$().ready(function () {
+    // handle click event on submit button
+    $("#questionButton").click(function () {
+        askQuestion();
 
-    // empty the user input text field
-    document.getElementById("userTextInput").value = "";
+    });
 
-    // don't send request if user didn't enter text
-    if (userText.length < 1) {
-        return;
-    }
-
-    // create a new AJAX object
-    var xhr = new XMLHttpRequest();
-
-    // send a post request to the path /question
-    xhr.open("POST", "/question");
-
-    // for debugging, otherwise the browser doesn't resend requests
-    xhr.setRequestHeader("Cache-Control", "no-cache");
-
-    // set a custom header value to the value of the text input field
-    xhr.setRequestHeader("user-question", userText);
-
-    // send the request
-    xhr.send();
-
-    // handler for all changes of the request ready state
-    // only do something if response is available 
-    xhr.onreadystatechange = () => {
-
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // retrieve the user name
-            var userName = xhr.getResponseHeader("userName");
-            if (xhr.responseText.length > 0) {
-
-                // append new text to the window and keep new text in view
-                createListItem(userName, userText);
-
-                var rand = Math.floor(Math.random() * 2000);
-                setTimeout(() => { createListItem("Eliza", xhr.responseText); }, rand)
-
-                // disable the submit button if the user quit the program
-                questionButton.disabled = xhr.getResponseHeader("quit") === "true";
-                document.getElementById("userTextInput").disabled = xhr.getResponseHeader("quit") === "true";
-                document.getElementById("userTextInput").setAttribute("placeholder", "Please start a new session!");
-
-            }
+    // if user input text field is in focus allow enter key to trigger the ask question function
+    $("#userTextInput").keypress((event) => {
+        if (event.which === 13) {
+            askQuestion();
         }
-    }
-}
+    });
+
+});
 
 function createListItem(name, msg) {
 
@@ -64,7 +26,7 @@ function createListItem(name, msg) {
     var img = document.createElement("img");
     img.style.width = "85px";
     img.className = "w3-bar-item w3-circle";
-    img.src = "female_avatar.png";
+    img.src = "res/female_avatar.png";
 
     var div = document.createElement("div");
     div.className = "w3-bar-item";
@@ -97,10 +59,43 @@ function createListItem(name, msg) {
     chatbox.appendChild(newList);
     window.scrollTo(0, document.body.scrollHeight);
 }
-// if user input text field is in focus allow enter key to trigger the ask question function
-document.getElementById("userTextInput").addEventListener("keypress", (event) => {
-    if (event.which === 13) {
-        askQuestion();
-    }
-});
 
+// function that gets executed on the button click
+function askQuestion() {
+    var userText = document.getElementById("userTextInput").value;
+    var questionButton = document.getElementById("questionButton");
+
+    // empty the user input text field
+    document.getElementById("userTextInput").value = "";
+
+    // don't send request if user didn't enter text
+    if (userText.length < 1) {
+        return;
+    }
+
+    // send a post request to the path /question
+    $.ajax("/question", {
+
+        // for debugging, otherwise the browser doesn't resend requests
+        // set a custom header value to the value of the text input field
+        headers: { "Cache-Control": "no-cache", "user-question": userText },
+        method: "POST"
+    }).done(function (data, textStatus, jqXHR) {
+        var userName = jqXHR.getResponseHeader("userName");
+        if (data.length > 0) {
+
+            // append new text to the window and keep new text in view
+            createListItem(userName, userText);
+
+            var rand = Math.floor(Math.random() * 2000);
+            setTimeout(() => { createListItem("Eliza", data); }, rand)
+
+            // disable the submit button if the user quit the program
+            questionButton.disabled = jqXHR.getResponseHeader("quit") === "true";
+            document.getElementById("userTextInput").disabled = jqXHR.getResponseHeader("quit") === "true";
+            document.getElementById("userTextInput").setAttribute("placeholder", "Please start a new session!");
+
+        }
+    })
+
+}

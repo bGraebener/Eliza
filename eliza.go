@@ -15,7 +15,6 @@ import (
 type data struct {
 	Username string
 	Greeting string
-	Quit     bool
 	NameSet  bool
 }
 
@@ -41,10 +40,11 @@ func main() {
 	userFarewells = elizaHelper.SliceToMap(dataMap["userFarewells"])
 
 	// parse the index html file
-	t, _ = template.ParseFiles("./index.html")
+	t, _ = template.ParseFiles("index.html")
 
 	// function that gets executed at when the first request is made
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+
 		// set name to false so the name input form gets shown
 		tmpData.NameSet = false
 		t.Execute(w, &tmpData)
@@ -55,6 +55,9 @@ func main() {
 
 	// handle a request to /question that is being send when a question was submitted
 	http.HandleFunc("/question", questionHandler)
+
+	// serve the resource files
+	http.Handle("/res/", http.StripPrefix("/res/", http.FileServer(http.Dir("res"))))
 
 	// listen for requests on port 8080
 	http.ListenAndServe(":8080", nil)
