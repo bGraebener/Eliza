@@ -1,7 +1,7 @@
 
 $().ready(function () {
     // handle click event on submit button
-    $("#questionButton").click(function () {
+    $("#questionButton").click(() => {
         askQuestion();
 
     });
@@ -15,14 +15,17 @@ $().ready(function () {
 
 });
 
+// function that creates a list item with the passed name and message text
 function createListItem(name, msg) {
 
     var chatbox = document.getElementById("chatbox");
 
+    // new list element
     var newList = document.createElement("li");
     newList.className = "w3-bar w3-round-large";
     newList.style.border = "none";
 
+    // default is a list elemtent for an eliza response, left justified, female icon
     var img = document.createElement("img");
     img.style.width = "85px";
     img.className = "w3-bar-item w3-circle";
@@ -31,6 +34,7 @@ function createListItem(name, msg) {
     var div = document.createElement("div");
     div.className = "w3-bar-item";
 
+    // name and message
     var spanOne = document.createElement("span");
     spanOne.className = "w3-large";
     spanOne.innerText = name;
@@ -39,6 +43,7 @@ function createListItem(name, msg) {
 
     var br = document.createElement("br");
 
+    // add everything to the list
     div.appendChild(spanOne);
     div.appendChild(br);
     div.appendChild(spanTwo);
@@ -46,8 +51,9 @@ function createListItem(name, msg) {
     newList.appendChild(img);
     newList.appendChild(div);
 
+    // give the user a different icon and put the list item to the right side of the screen
     if (name != "Eliza") {
-        img.src = "male_avatar.png";
+        img.src = "res/male_avatar.png";
         div.style = "float:right";
         img.style = "float:right; width:85px";
         newList.style.textAlign = "right";
@@ -56,7 +62,9 @@ function createListItem(name, msg) {
         newList.style.float = "right"
     }
 
+    // add it to the list
     chatbox.appendChild(newList);
+    // keep the new item in view
     window.scrollTo(0, document.body.scrollHeight);
 }
 
@@ -80,6 +88,8 @@ function askQuestion() {
         // set a custom header value to the value of the text input field
         headers: { "Cache-Control": "no-cache", "user-question": userText },
         method: "POST"
+
+        // function that executes after a successfull ajax request
     }).done(function (data, textStatus, jqXHR) {
         var userName = jqXHR.getResponseHeader("userName");
         if (data.length > 0) {
@@ -87,15 +97,16 @@ function askQuestion() {
             // append new text to the window and keep new text in view
             createListItem(userName, userText);
 
+            // wait a random amount of time to simulate eliza thinking about a response
             var rand = Math.floor(Math.random() * 2000);
             setTimeout(() => { createListItem("Eliza", data); }, rand)
+        }
 
-            // disable the submit button if the user quit the program
-            questionButton.disabled = jqXHR.getResponseHeader("quit") === "true";
-            document.getElementById("userTextInput").disabled = jqXHR.getResponseHeader("quit") === "true";
+        // disable the submit button and input field if the user quit the program
+        questionButton.disabled = jqXHR.getResponseHeader("quit") === "true";
+        document.getElementById("userTextInput").disabled = jqXHR.getResponseHeader("quit") === "true";
+        if (questionButton.disabled) {
             document.getElementById("userTextInput").setAttribute("placeholder", "Please start a new session!");
-
         }
     })
-
 }
