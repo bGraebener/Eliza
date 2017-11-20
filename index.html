@@ -48,9 +48,9 @@
                     <span>Welcome {{.Username}}! I am Eliza. {{.Greeting}}</span>
                 </div>
             </li>
+            {{end}}
         </ul>
-
-
+        {{if .NameSet}}
         <!-- form with a textinput for user input and a button to submit the question -->
         <form class="w3-container" onSubmit="return false;" style="position: fixed; bottom: 50px; width: 100%">
             <div class="w3-bar">
@@ -69,10 +69,10 @@
         {{if not .NameSet}}
         <form class="w3-container" action="/session" method="POST" style="position: fixed; bottom: 50px; width: 100%">
             <div class="w3-bar">
-                <input class="w3-input w3-border w3-bar-item" type="text" id="userNameInput" name="userNameInput" style="width: 90%; float: left;"
+                <input class="w3-input w3-border w3-bar-item" type="text" id="userNameInput" name="userNameInput" style="width: 80%; float: left;"
                     placeholder="Please enter your name..." autofocus>
-                <span class="w3-bar-item">
-                    <button class="w3-button w3-gray w3-hover-black w3-margin-top" id="nameButton" type="submit" style="width:45px">Enter Name</button>
+                <span class="w3-bar-item" style="padding-top: 1px;">
+                    <button class="w3-button w3-gray w3-hover-black" id="nameButton" type="submit">Enter Name</button>
                 </span>
             </div>
         </form>
@@ -81,6 +81,7 @@
     <!-- footer -->
     <footer class="w3-bar w3-light-gray w3-opacity" style="position: fixed; bottom: 0; width: 100%">
         <p class="w3-center">Bastian Graebener - G00340600 - Eliza Chatbot - Data Representation and Querying</p>
+        <!-- <a href="/" class="w3-bar-item w3-border w3-button w3-margin w3-right w3-padding">New Session</a> -->
     </footer>
 
     <!-- script source -->
