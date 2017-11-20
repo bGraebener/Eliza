@@ -1,3 +1,9 @@
+// Eliza.go
+// Main file - Main file of the Eliza chatbot implementation
+// 		Implements a small webserver that serves a html template page and handles requests made to port 8080
+//		Has functions that take userinput, transform it and puts a response back onto the html page
+// Author - Bastian Graebener
+
 package main
 
 import (
@@ -32,12 +38,8 @@ func main() {
 
 	rand.Seed(time.Now().UTC().UnixNano())
 	// load resources from resources file
-	dataMap := elizaHelper.LoadResources()
 
-	// split individual string data in the correct containers
-	elizaGreetings = dataMap["elizaGreetings"]
-	elizaFarewells = dataMap["elizaFarewells"]
-	userFarewells = elizaHelper.SliceToMap(dataMap["userFarewells"])
+	elizaGreetings, elizaFarewells, userFarewells = elizaHelper.LoadResources()
 
 	// parse the index html file
 	t, _ = template.ParseFiles("index.html")

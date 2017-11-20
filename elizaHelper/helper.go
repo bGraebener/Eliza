@@ -1,3 +1,7 @@
+// Helper.go
+// Utility file - Contains utility functions for the eliza chatbot
+// Author - Bastian Graebener
+
 package elizaHelper
 
 import (
@@ -41,6 +45,7 @@ func (r keyWords) Swap(r1, r2 int) {
 var elizaData keyWords
 
 // map of words to be substituted
+// taken from https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
 var substitutions = map[string]string{
 	"am":       "are",
 	"was":      "were",
@@ -67,12 +72,20 @@ func GetResponse(userInput string) string {
 	keyWordList := getKeyWordList(userInput)
 
 	return findDecompPatterns(userInput, keyWordList)
-
 }
 
-// LoadResources loads the resources from the json files
-func LoadResources() map[string][]string {
+// LoadResources loads the resources from the json files and returns the greeting and farewell slices
+func LoadResources() ([]string, []string, map[string]int) {
 
+	// load all keyword data into memory
+	elizaData = readKeywordData()
+
+	// return the greetings and farewells
+	return loadGreetings()
+}
+
+// loadGreetings reads the greetings from the startEnd.json file
+func loadGreetings() ([]string, []string, map[string]int) {
 	dataMap := make(map[string][]string)
 
 	// read the json file
@@ -86,12 +99,10 @@ func LoadResources() map[string][]string {
 		}
 	}
 
-	// load all keyword data into memory
-	elizaData = readKeywordData()
-	return dataMap
+	return dataMap["elizaGreetings"], dataMap["elizaFarewells"], SliceToMap(dataMap["userFarewells"])
 }
 
-//parse the keyword data from the keyword.json file
+//parses the keyword data from the keyword.json file
 func readKeywordData() keyWords {
 	var list keyWords
 	// attempt to read the file
@@ -156,8 +167,8 @@ func findDecompPatterns(userInput string, keyWordList []KeyWord) string {
 				continue
 			}
 
-			fmt.Println(keyWord.Keyword)
-			fmt.Println(decomp.DisAssRule)
+			// log.Println(decomp.DisAssRule)
+
 			// choose a random response
 			response = decomp.Responses[rand.Intn(len(decomp.Responses))]
 
