@@ -1,10 +1,10 @@
- /* Taken from:  
-        https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css */
 
 body {
     padding-bottom: 120px;
 }
 
+/* Taken from:  
+       https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css */
 .page-bg {
     background: url("background.jpg");
     filter: blur(5px);

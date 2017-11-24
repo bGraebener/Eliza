@@ -1,7 +1,7 @@
 // Eliza.go
 // Main file - Main file of the Eliza chatbot implementation
 // 		Implements a small webserver that serves a html template page and handles requests made to port 8080
-//		Has functions that take userinput, transform it and puts a response back onto the html page
+//		Has functions that handles requests when the user first visits the index page, when he/she entered a name and when a user question was submitted
 // Author - Bastian Graebener
 
 package main
@@ -21,7 +21,7 @@ import (
 type data struct {
 	Username string
 	Greeting string
-	NameSet  bool
+	NameSet  bool // determines which part of the hmtl document gets displayed
 }
 
 var tmpData data
@@ -70,7 +70,6 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// choose a random greeting from the greetings slice
-	// elizaGreetings := elizaHelper.GetGreetings()
 	ran := rand.Intn(len(elizaHelper.ElizaGreetings))
 	tmpData.Greeting = elizaHelper.ElizaGreetings[ran]
 	tmpData.NameSet = true
@@ -81,8 +80,6 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 
 // function that gets executed every time a request is made to /question
 func questionHandler(w http.ResponseWriter, r *http.Request) {
-	// userFarewells := elizaHelper.GetUserFarewells()
-	// elizaFarewells := elizaHelper.GetFarewells()
 
 	// retrieve the header value for the field "user-question"
 	question := r.Header.Get("user-question")
