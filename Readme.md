@@ -1,10 +1,26 @@
 # Eliza - Chatbot
 
+## Author: Bastian Graebener
+
+>Student-ID: G00340600
+>
+>Module: Data Representation and Querying
+>
+>Year: 3
+>
+>Program: Bsc. in Software Development
+>
+>Lecturer: Ian McLoughlin
+>
+>Institute: Galway-Mayo Institute of Technology
+
 ## Introduction
 
-This is an implementation of the classic Eliza Chatbot as described [here](https://en.wikipedia.org/wiki/ELIZA) and [here](https://www.masswerk.at/elizabot/).
+This is an implementation of the classic Eliza Chatbot as described [here](https://en.wikipedia.org/wiki/ELIZA) and [here](https://www.masswerk.at/elizabot/) in Golang. The application is a webapplication that can be accessed through a browser by navigating to the address "localhost:8080".
 
 It was created as a project for the module "Data Representation and Querying" in 3rd year of the Bsc. Software Development Course at Galway-Mayo Institute of Technology.
+
+You can find the [Project Specifications](https://github.com/bGraebener/Eliza.git) here.
 
 The Eliza-Chatbot is a chat bot implementation that analyses user input on a very simple level and responses with a phrase, mimiking a psychotherapy session.
 
@@ -23,12 +39,18 @@ The session can be ended by submitting "stop", "bye", "goodbye", "quit" or "exit
 
 ## Usage
 
-With Go installed and the GOPATH set, follow these steps to download and install the Eliza-Chatbot.
+With Go and Git installed and the GOPATH set, follow these steps to download and install the Eliza-Chatbot.
 
 Download the project with
 
 ```go
 go get github.com/bGraebener/Eliza
+```
+
+or
+
+```git
+git clone https://github.com/bGraebener/Eliza.git
 ```
 
 Navigate to
@@ -49,11 +71,16 @@ In any browser navigate to
 
     localhost:8080
 
-and follow the instructions
+and follow the instructions.
 
-## References
+## References and Sources used to complete the project
 
 1. Basic ideas and data for Eliza responses: http://www.masswerk.at/elizabot/
 2. Instructions on how to implement Eliza: http://www.chayden.net/eliza/instructions.txt
 3. List of Reflections for pronouns: https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
-4. Blurred Background: https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css
+4. Reading json files in golang: https://www.chazzuka.com/2015/03/load-parse-json-file-golang/
+5. Using regular expressions in golang:
+https://github.com/StefanSchroeder/Golang-Regex-Tutorial
+6. Expression language for golangs html templates:
+http://2016.8-p.info/post/06-18-go-html-template/
+7. Blurred Background: https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css

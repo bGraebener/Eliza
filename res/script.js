@@ -1,5 +1,6 @@
 
-$().ready(() => {
+// add eventlisteners on document ready
+$(() => {
     // handle click event on submit button
     $("#questionButton").click(() => {
         askQuestion();

@@ -1,8 +1,5 @@
 // Helper.go
 // Utility file - Contains utility functions and custom data types for the eliza chatbot
-// 				Keyword struct: represents a keyword. It contains the keyword itself, its rank and a slice of decomposition structs.
-// 				Decomp struct: represents a decomposition rule. It contains a dissassembly rule and a slice of response strings.
-// 				keywords type: a redefinition of a keyword slice. Implements the Sort interface to sort the keywords by rank.
 // Author - Bastian Graebener
 
 package elizaHelper
@@ -112,7 +109,6 @@ func loadGreetings() {
 	ElizaGreetings = dataMap["elizaGreetings"]
 	ElizaFarewells = dataMap["elizaFarewells"]
 	UserFarewells = SliceToMap(dataMap["userFarewells"])
-
 }
 
 //parses the keyword data from the keyword.json file
@@ -215,8 +211,8 @@ func substitute(captureGroupValue string) string {
 	return strings.Join(words, " ")
 }
 
-// SliceToMap converts a string slice into a map,
-// convience function for faster, easier lookup of keywords and responses
+// SliceToMap converts a string slice into a map
+// convience function for fastercheck if user entered a keyword for quiting the program
 func SliceToMap(slice []string) map[string]int {
 
 	tmpMap := make(map[string]int)
