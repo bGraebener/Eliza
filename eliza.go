@@ -24,13 +24,6 @@ type data struct {
 	NameSet  bool
 }
 
-// arrays that hold strings for greeting the user and responses after the user quit the program
-var elizaGreetings []string
-var elizaFarewells []string
-
-// options for the user to quit the program
-var userFarewells map[string]int
-
 var tmpData data
 var t *template.Template
 
@@ -38,8 +31,8 @@ func main() {
 	// seed the random number generator
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	// load resources from resources file
-	elizaGreetings, elizaFarewells, userFarewells = elizaHelper.LoadResources()
+	// load resources from files
+	elizaHelper.LoadResources()
 
 	// parse the index html file
 	t, _ = template.ParseFiles("index.html")
@@ -75,9 +68,11 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 	if len(tmpData.Username) < 1 {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
+
 	// choose a random greeting from the greetings slice
-	ran := rand.Intn(len(elizaGreetings))
-	tmpData.Greeting = elizaGreetings[ran]
+	// elizaGreetings := elizaHelper.GetGreetings()
+	ran := rand.Intn(len(elizaHelper.ElizaGreetings))
+	tmpData.Greeting = elizaHelper.ElizaGreetings[ran]
 	tmpData.NameSet = true
 
 	// execute the html file
@@ -86,6 +81,9 @@ func newSessionHandler(w http.ResponseWriter, r *http.Request) {
 
 // function that gets executed every time a request is made to /question
 func questionHandler(w http.ResponseWriter, r *http.Request) {
+	// userFarewells := elizaHelper.GetUserFarewells()
+	// elizaFarewells := elizaHelper.GetFarewells()
+
 	// retrieve the header value for the field "user-question"
 	question := r.Header.Get("user-question")
 	question = strings.ToLower(question)
@@ -95,10 +93,10 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 
 	// check if user quit the session
 	for _, word := range strings.Split(question, " ") {
-		if _, ok := userFarewells[word]; ok {
+		if _, ok := elizaHelper.UserFarewells[word]; ok {
 			// choose a random farewell phrase
 			w.Header().Set("quit", "true")
-			fmt.Fprintf(w, "%s", elizaFarewells[rand.Intn(len(elizaFarewells))])
+			fmt.Fprintf(w, "%s", elizaHelper.ElizaFarewells[rand.Intn(len(elizaHelper.ElizaFarewells))])
 			return
 		}
 	}

@@ -68,11 +68,10 @@ function createListItem(name, msg) {
 
 // function that gets executed on the button click
 function askQuestion() {
-    var userText = document.getElementById("userTextInput").value;
-    var questionButton = document.getElementById("questionButton");
+    var userText = $("#userTextInput").value;
 
     // empty the user input text field
-    document.getElementById("userTextInput").value = "";
+    $("#userTextInput").value = "";
 
     // don't send request if user didn't enter text
     if (userText.length < 1) {
@@ -100,11 +99,14 @@ function askQuestion() {
             setTimeout(() => createListItem("Eliza", data), rand)
         }
 
+        $("#userTextInput").focus();
+
         // disable the submit button and input field if the user quit the program
-        questionButton.disabled = jqXHR.getResponseHeader("quit") === "true";
-        document.getElementById("userTextInput").disabled = jqXHR.getResponseHeader("quit") === "true";
-        if (questionButton.disabled) {
-            document.getElementById("userTextInput").setAttribute("placeholder", "Please start a new session!");
+        $("#questionButton").disabled = jqXHR.getResponseHeader("quit") === "true";
+        $("#userTextInput").disabled = jqXHR.getResponseHeader("quit") === "true";
+
+        if ($("#userTextInput").disabled) {
+            $("#userTextInput").setAttribute("placeholder", "Please start a new session!");
         }
     })
 }
