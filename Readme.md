@@ -20,17 +20,22 @@ This is an implementation of the classic Eliza Chatbot as described [here](https
 
 It was created as a project for the module "Data Representation and Querying" in 3rd year of the Bsc. Software Development Course at Galway-Mayo Institute of Technology.
 
-You can find the [Project Specifications](https://github.com/bGraebener/Eliza.git) here.
+You can find the [Project Specifications](https://data-representation.github.io/problems/project.html) here.
 
 The Eliza-Chatbot is a chat bot implementation that analyses user input on a very simple level and responses with a phrase, mimiking a psychotherapy session.
 
 ## How the application works
 
-Upon the first request to port 8080 the user is asked to enter a name. After entering a name the name is stored in a HTTP-Header and the user is rerouted to the "session"-page.  The user is greeted with a randomly chosen greeting from an array of greetings. The user can then enter a phrase in the input textbox and either press enter or click on the arrow button to send the question.
+Upon the first request to port 8080 the user is asked to enter a name. After entering a name the name is stored in a HTTP-Header and the user is rerouted to the "session"-page.
+The user is greeted with a randomly chosen greeting from an array of greetings. The user can then enter a phrase in the input textbox and either press enter or click on the arrow button to send the question.
+
 Submitting the question triggers an AJAX-Request to be sent passing the user input string.
 
 The input string is split into a slice of individual words. The slice is iterated over and a list is created of all keywords that are contained in the users question. The list is then sorted by rank in descending order, so the highest ranked keyword is first in the list.
-For all keywords in the list, the keywords decomposition rules are compiled into regular expressions and checked against the original question. If a pattern is found, a random response is chosen. The captured text from the regular expression is searched for pronouns. Every found pronoun is then reflected by an appropriate counterpart.
+
+For all keywords in the list, the keywords decomposition rules are compiled into regular expressions and checked against the original question. If a pattern is found, a random response is chosen.
+
+The captured text from the regular expression is searched for pronouns. Every found pronoun is then reflected by an appropriate counterpart.
 Afterwards a response is assembled from the randomly chosen response and the reflected capure group.
 
 If no keyword or matching pattern is found, a randomly chosen, generic response is returned.
@@ -75,12 +80,12 @@ and follow the instructions.
 
 ## References and Sources used to complete the project
 
-1. Basic ideas and data for Eliza responses: http://www.masswerk.at/elizabot/
-2. Instructions on how to implement Eliza: http://www.chayden.net/eliza/instructions.txt
-3. List of Reflections for pronouns: https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
-4. Reading json files in golang: https://www.chazzuka.com/2015/03/load-parse-json-file-golang/
-5. Using regular expressions in golang:
-https://github.com/StefanSchroeder/Golang-Regex-Tutorial
-6. Expression language for golangs html templates:
-http://2016.8-p.info/post/06-18-go-html-template/
-7. Blurred Background: https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css
+1. Basic ideas and data for Eliza responses: <http://www.masswerk.at/elizabot/>
+1. Instructions on how to implement Eliza: <http://www.chayden.net/eliza/instructions.txt>
+1. List of Reflections for pronouns: <https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/>
+1. Reading json files in golang: <https://www.chazzuka.com/2015/03/load-parse-json-file-golang/>
+1. Using regular expressions in golang: <https://github.com/StefanSchroeder/Golang-Regex-Tutorial>
+1. Expression language for golangs html templates: <http://2016.8-p.info/post/06-18-go-html-template/>
+1. Blurred Background: <https://stackoverflow.com/questions/38366571/how-to-blur-the-background-image-only-in-css>
+1. Eliza and User icon: <https://www.shareicon.net/pack/user-pictures>
+1. Background image: <https://www.alamy.com/stock-photo-flat-in-bermondsey-living-room-with-wall-of-books-chairs-by-poul-kjrholm-182959.html>
