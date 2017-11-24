@@ -25,8 +25,8 @@
     <!-- main container -->
     <div class="w3-container">
         <hr>
-        <!-- ask for the users name on first visit -->
         <ul id="chatbox" class="w3-ul">
+            <!-- ask for the users name on first visit -->
             {{if not .NameSet}}
             <li class="w3-bar w3-round-large" style="border: none;">
                 <img src="res/female_avatar.png" class="w3-bar-item w3-circle" style="width:85px" />
@@ -50,6 +50,7 @@
             </li>
             {{end}}
         </ul>
+
         {{if .NameSet}}
         <!-- form with a textinput for user input and a button to submit the question -->
         <form class="w3-container" onSubmit="return false;" style="position: fixed; bottom: 50px; width: 100%">
@@ -65,6 +66,7 @@
         </form>
 
         {{end}}
+
         <!-- form with an textinput for the user name and a button to submit -->
         {{if not .NameSet}}
         <form class="w3-container" action="/session" method="POST" style="position: fixed; bottom: 50px; width: 100%">
@@ -78,6 +80,7 @@
         </form>
         {{end}}
     </div>
+
     <!-- footer -->
     <footer class="w3-bar w3-light-gray w3-opacity" style="position: fixed; bottom: 0; width: 100%">
         <p class="w3-center">Bastian Graebener - G00340600 - Eliza Chatbot - Data Representation and Querying</p>

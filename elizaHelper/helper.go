@@ -1,5 +1,8 @@
 // Helper.go
-// Utility file - Contains utility functions for the eliza chatbot
+// Utility file - Contains utility functions and custom data types for the eliza chatbot
+// 				Keyword struct: represents a keyword. It contains the keyword itself, its rank and a slice of decomposition structs.
+// 				Decomp struct: represents a decomposition rule. It contains a dissassembly rule and a slice of response strings.
+// 				keywords type: a redefinition of a keyword slice. Implements the Sort interface to sort the keywords by rank.
 // Author - Bastian Graebener
 
 package elizaHelper
@@ -44,27 +47,7 @@ func (r keyWords) Swap(r1, r2 int) {
 // global variable that holds all keywords contained in keywords.json
 var elizaData keyWords
 
-// map of words to be substituted
-// taken from https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
-var substitutions = map[string]string{
-	"am":       "are",
-	"was":      "were",
-	"i":        "you",
-	"i'd":      "you would",
-	"i've":     "you have",
-	"i'll":     "you will",
-	"my":       "your",
-	"are":      "am",
-	"you've":   "I have",
-	"you'll":   "I will",
-	"your":     "my",
-	"yours":    "mine",
-	"you":      "me",
-	"me":       "you",
-	"myself":   "yourself",
-	"yourself": "myself",
-	"i'm":      "you are",
-}
+var substitutions map[string]string
 
 // GetResponse returns an appropriate response to the user input
 func GetResponse(userInput string) string {
@@ -80,8 +63,24 @@ func LoadResources() ([]string, []string, map[string]int) {
 	// load all keyword data into memory
 	elizaData = readKeywordData()
 
+	// load the substitutions from file
+	loadSubstitutions()
+
 	// return the greetings and farewells
 	return loadGreetings()
+}
+
+// loadSubstitutions reads the substitutions file and populates the map of substitutions
+func loadSubstitutions() {
+	// read the json file
+	if raw, err := ioutil.ReadFile("./res/substitutions.json"); err != nil {
+		log.Fatal("Couldn't read substitutions.json")
+	} else {
+		//parse the json file
+		if err := json.Unmarshal(raw, &substitutions); err != nil {
+			log.Fatal("Couldn't parse substitutions.json")
+		}
+	}
 }
 
 // loadGreetings reads the greetings from the startEnd.json file
@@ -90,12 +89,12 @@ func loadGreetings() ([]string, []string, map[string]int) {
 
 	// read the json file
 	if raw, err := ioutil.ReadFile("./res/startEnd.json"); err != nil {
-		log.Fatal("Couldn't read resource file!")
+		log.Fatal("Couldn't read startEnd.json!")
 	} else {
 
 		// parse the json data
 		if err := json.Unmarshal(raw, &dataMap); err != nil {
-			log.Fatal("Couldn't parse json file")
+			log.Fatal("Couldn't parse startEnd.json")
 		}
 	}
 
@@ -107,11 +106,11 @@ func readKeywordData() keyWords {
 	var list keyWords
 	// attempt to read the file
 	if raw, err := ioutil.ReadFile("./res/keywords.json"); err != nil {
-		log.Fatal(err)
+		log.Fatal("Couldn't read keywords.json!")
 	} else {
 		// parse the json data into the special struct slice
 		if err = json.Unmarshal(raw, &list); err != nil {
-			log.Fatal(err)
+			log.Fatal("Couldn't parse keywords.json!")
 		}
 	}
 	return list

@@ -35,16 +35,16 @@ var tmpData data
 var t *template.Template
 
 func main() {
-
+	// seed the random number generator
 	rand.Seed(time.Now().UTC().UnixNano())
-	// load resources from resources file
 
+	// load resources from resources file
 	elizaGreetings, elizaFarewells, userFarewells = elizaHelper.LoadResources()
 
 	// parse the index html file
 	t, _ = template.ParseFiles("index.html")
 
-	// function that gets executed at when the first request is made
+	// function that gets executed when the first request is made
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
 		// set name to false so the name input form gets shown
@@ -90,6 +90,9 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 	question := r.Header.Get("user-question")
 	question = strings.ToLower(question)
 
+	// pass the username to be used in the chat window
+	w.Header().Set("userName", tmpData.Username)
+
 	// check if user quit the session
 	for _, word := range strings.Split(question, " ") {
 		if _, ok := userFarewells[word]; ok {
@@ -99,9 +102,6 @@ func questionHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-
-	// pass the username to be used in the chat window
-	w.Header().Set("userName", tmpData.Username)
 
 	// pass eliza response phrase to the responsewriter
 	response := elizaHelper.GetResponse(question)

@@ -1,9 +1,8 @@
 
-$().ready(function () {
+$().ready(() => {
     // handle click event on submit button
     $("#questionButton").click(() => {
         askQuestion();
-
     });
 
     // if user input text field is in focus allow enter key to trigger the ask question function
@@ -12,7 +11,6 @@ $().ready(function () {
             askQuestion();
         }
     });
-
 });
 
 // function that creates a list item with the passed name and message text
@@ -90,16 +88,16 @@ function askQuestion() {
         method: "POST"
 
         // function that executes after a successfull ajax request
-    }).done(function (data, textStatus, jqXHR) {
+    }).done((data, textStatus, jqXHR) => {
         var userName = jqXHR.getResponseHeader("userName");
         if (data.length > 0) {
 
-            // append new text to the window and keep new text in view
+            // append user question to the window
             createListItem(userName, userText);
 
-            // wait a random amount of time to simulate eliza thinking about a response
+            // wait a random amount of time to simulate eliza thinking about a response and add it to the window
             var rand = Math.floor(Math.random() * 2000);
-            setTimeout(() => { createListItem("Eliza", data); }, rand)
+            setTimeout(() => createListItem("Eliza", data), rand)
         }
 
         // disable the submit button and input field if the user quit the program

@@ -28,12 +28,12 @@ With Go installed and the GOPATH set, follow these steps to download and install
 Download the project with
 
 ```go
-go get github.com/bgraebener/Eliza
+go get github.com/bGraebener/Eliza
 ```
 
 Navigate to
 
-    %GOPATH%/src/github.com/bgraebener/Eliza
+    %GOPATH%/src/github.com/bGraebener/Eliza
 
 Build with:
 
