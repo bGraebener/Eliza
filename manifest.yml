@@ -1,0 +1,11 @@
+---
+applications:
+- instances: 1
+  timeout: 180
+  name: Eliza
+  buildpack: go_buildpack
+  memory: 256M
+  domain: not-used.net
+  host: not-used
+  env:
+    GOPACKAGENAME : eliza
