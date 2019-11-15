@@ -1,0 +1,12 @@
+applications:
+- buildpack: go_buildpack
+  domain: null
+  env:
+    GOPACKAGENAME: eliza
+  host: null
+  instances: 1
+  memory: 256M
+  name: Eliza
+  routes:
+  - route: Eliza.eu-gb.cf.appdomain.cloud
+  timeout: 180
